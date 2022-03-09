@@ -13,13 +13,16 @@ const ButtonsContainer = styled.div`
   height: 100%;
 `;
 
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "+"];
+
+  const arr = ["한식", "중식", "양식", "일식", "분식", "카페", "아시안", "햄버거", "치킨", "피자", "+"];
+  
+
 
 function Buttons() {
   return (
     <ButtonsContainer>
       {arr.map((item, key) => {
-        return <Button key={key} title={item} />;
+        return <Button id= "btn_select" key={key} title={item}/>;
       })}
     </ButtonsContainer>
   );

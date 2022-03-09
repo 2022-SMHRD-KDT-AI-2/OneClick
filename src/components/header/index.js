@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 
+
 const HeaderContainer = styled.div`
   height: 60px;
   border-bottom: 1px solid gray;
@@ -26,7 +27,8 @@ function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <HeaderContainer>
-      <Logo>OneTouch</Logo>
+      
+      <Logo><img src="img/logo1.png" width="50px" /><img src="img/logo.png" width="150px" /></Logo>
       {isLoggedIn ? (
         <Link>LOGOUT</Link>
       ) : (
