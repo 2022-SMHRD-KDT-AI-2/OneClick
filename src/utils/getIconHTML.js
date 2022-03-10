@@ -1,7 +1,7 @@
 export function getIconHTML(emoji, title, info) {
     const html = `
     
-      <div id="icon" style="
+      <div class="marker" style="
           background-color: white;
           border-radius: 25px;
           display: flex;
