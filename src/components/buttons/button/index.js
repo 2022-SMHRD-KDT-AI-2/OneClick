@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "@emotion/styled";
-import "./index.css"
 
 const ButtonContainer = styled.button`
   border-radius: 0.5rem;
