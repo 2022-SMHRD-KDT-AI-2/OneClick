@@ -22,8 +22,8 @@ function ListItem() {
       width: "150px",
       height: "150px"
     }}></img>
-    <div class="shop">
-      <div class="content" style={{
+    <div className="shop">
+      <div className="content" style={{
         fontSize: "15px",
         margin: "0px",
         fontFamily:"ONE-Mobile-POP"

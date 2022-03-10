@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-
+import { useNavigate } from "react-router-dom";
+import { Cookies } from "react-cookie";
 
 const HeaderContainer = styled.div`
   height: 60px;
@@ -24,17 +25,35 @@ const Link = styled.a`
 `;
 
 function Header() {
+  const nav = useNavigate();
+  const cookie = new Cookies();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    if (cookie.get("token")) {
+      setIsLoggedIn(true);
+    }
+  });
   return (
     <HeaderContainer>
-      
-      <Logo><img src="img/logo1.png" width="50px" /><img src="img/logo.png" width="150px" /></Logo>
+      <Logo>OneClick</Logo>
       {isLoggedIn ? (
-        <Link>LOGOUT</Link>
+        <Link>ADMIN</Link>
       ) : (
         <div>
-          <Link>LOGIN</Link>
-          <Link>SIGNUP</Link>
+          <Link
+            onClick={() => {
+              nav("/login");
+            }}
+          >
+            LOGIN
+          </Link>
+          <Link
+            onClick={() => {
+              nav("/signup");
+            }}
+          >
+            SIGNUP
+          </Link>
         </div>
       )}
     </HeaderContainer>
