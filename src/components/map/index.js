@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
 import ReactDOMServer from "react-dom/server";
 import { getIconHTML } from "../../utils/getIconHTML";
-import InfoWindow from "./infoWindow";
+import Review from "./review";
 
 function Map() {
   const mapRef = useRef(null);
@@ -39,10 +39,15 @@ function Map() {
             });
              */
       const info = new Tmapv2.InfoWindow({
-        position: loc,
-        content: ReactDOMServer.renderToString(<InfoWindow />),
+        position: new Tmapv2.LatLng(
+            position.coords.latitude,
+            position.coords.longitude
+        ),
+        background: false,
+        border: "0px solid white",
+        content: ReactDOMServer.renderToString(<Review />),
         type: 2,
-        border: "0px solid #FF0000",
+        align: 15,
         map: mapRef.current,
       });
     });
@@ -50,7 +55,7 @@ function Map() {
 
   useEffect(() => {
     initTMap();
-    console.log(ReactDOMServer.renderToString(<InfoWindow />));
+    console.log(ReactDOMServer.renderToString(<modal />));
   }, [initTMap]);
 
   return <div id="TMap" />;

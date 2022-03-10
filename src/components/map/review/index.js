@@ -3,10 +3,8 @@ import "./modal.css";
 import StarRating from "./StarRating";
 import "./StarRating";
 
-function Modal({ setOpenModal }) {
-    const reviewPoints = ["맛","가격","청결도","접근성","분위기"] 
-    
-    const onClick=styled(Container)
+function Review({ setOpenModal }) {
+    const reviewPoints = ["맛","가격","청결도","접근성","분위기"]
 
     const oneReview =["🙂'음식이 맛있어요'","🖼'인테리어가 멋져요'","🍽'혼밥하기 좋아요'","💳'가성비가 좋아요'",
                       "🌱'매장이 청결해요'","🏩'매장이 넓어요'","🚗'주차하기 편해요'","💐'특별한 날 가기 좋아요'",
@@ -32,10 +30,8 @@ function Modal({ setOpenModal }) {
     }
 
     return (
-      <div className="modalBackground" onClick={() => {setOpenModal(false);}} style={{
-        fontFamily : 'ONE-Mobile-POP'
-      }}>
-        <div className="modalContainer" onClick={(e) =>{e.stopPropagation()}}>
+
+        <div className="modalContainer">
           <div style={{
             display:"flex",
             flexDirection:"row"
@@ -88,12 +84,12 @@ function Modal({ setOpenModal }) {
           </div>
           <div className="footer" >
             <button>등록</button>
-            <button onClick={() => {setOpenModal(false);}} id="cancelBtn"> 취소 </button>
+            <button id="cancelBtn"> 취소 </button>
           </div>
         </div>
         
-      </div>
+
     );
   }
 
-export default Modal;
+export default Review;
