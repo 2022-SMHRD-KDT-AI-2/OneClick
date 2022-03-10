@@ -1,6 +1,9 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styled from "@emotion/styled";
 import Button from "./button";
+import {useRecoilState} from "recoil";
+import {userData} from "../../atom/atom";
+import PresetModal from "./presetModal";
 
 const ButtonsContainer = styled.div`
   min-width: 900px;
@@ -13,18 +16,18 @@ const ButtonsContainer = styled.div`
   height: 100%;
 `;
 
-
-  const arr = ["한식", "중식", "양식", "일식", "분식", "카페", "아시안", "햄버거", "치킨", "피자", "+"];
-  
-
-
 function Buttons() {
+  const [user, setUser] = useRecoilState(userData);
+  const [openModal, setOpenModal] = useState(false);
+
   return (
-    <ButtonsContainer>
-      {arr.map((item, key) => {
-        return <Button id= "btn_select" key={key} title={item}/>;
-      })}
-    </ButtonsContainer>
+      <ButtonsContainer>
+        {user.preset.map((item, index) => {
+          return <Button key={index} title={item.keyword}/>;
+        })}
+        <Button title="+" toggle={setOpenModal}/>
+        {openModal && <PresetModal setOpenModal={setOpenModal}/>}
+      </ButtonsContainer>
   );
 }
 
