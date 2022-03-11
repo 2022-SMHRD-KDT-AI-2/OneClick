@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { Cookies } from "react-cookie";
+import Admin from "./admin";
 
 const HeaderContainer = styled.div`
   height: 60px;
@@ -28,6 +29,7 @@ function Header() {
   const nav = useNavigate();
   const cookie = new Cookies();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   useEffect(() => {
     if (cookie.get("token")) {
       setIsLoggedIn(true);
@@ -35,9 +37,10 @@ function Header() {
   });
   return (
     <HeaderContainer>
+      {openModal && <Admin setOpenModal={setOpenModal} />}
       <Logo>OneClick</Logo>
       {isLoggedIn ? (
-        <Link>ADMIN</Link>
+        <Link onClick={() => setOpenModal(true)}>ADMIN</Link>
       ) : (
         <div>
           <Link

@@ -53,8 +53,6 @@ export class Shop {
             reader.onload = () => {
               let img = document.getElementById(this.data.id + "image");
               img.src = reader.result;
-              //img.width = "150px";
-              //img.height = "150px";
             };
           });
 
