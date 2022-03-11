@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./modal.css";
-import "./StarRating";
-
-import { comment } from "../../../utils/data";
+import { comment, reviewTitle } from "../../../utils/data";
 import styled from "@emotion/styled";
 
 const Image = styled.img`
@@ -11,29 +9,6 @@ const Image = styled.img`
 `;
 
 function AddReview({ id }) {
-  const reviewPoints = ["맛", "가격", "청결도", "접근성", "분위기"];
-  const [commentState, setCommentState] = useState([
-    {
-      0: false,
-      1: false,
-      2: false,
-      3: false,
-      4: false,
-      5: false,
-      6: false,
-      7: false,
-      8: false,
-      9: false,
-    },
-  ]);
-
-  const onClickComment = (e) => {
-    console.log("asdf");
-    let temp = commentState.slice();
-    temp[0][e.target.name] = !temp[0][e.target.name];
-    setCommentState([...temp]);
-  };
-
   return (
     <div className="modalContainer">
       <div
@@ -50,9 +25,10 @@ function AddReview({ id }) {
         >
           <p className="title">
             <h3 style={{ margin: 10 }}>평가</h3>
-            {reviewPoints.map((item, key) => {
+            {reviewTitle.map((item, key) => {
               return (
                 <div
+                  key={key}
                   style={{
                     display: "flex",
                     flexDirection: "row",
@@ -72,7 +48,7 @@ function AddReview({ id }) {
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <div>
                       <input
-                        id={id + reviewPoints[key]}
+                        id={id + reviewTitle[key]}
                         defaultValue={0}
                         style={{ width: "30px" }}
                       />

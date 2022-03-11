@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {Cookies} from "react-cookie";
 import {
   AuthContainer,
   Button,
@@ -18,6 +19,7 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [admin, setAdmin] = useState(false);
+  const cookies = new Cookies()
   const onChangeCheck = (e) => {
     setAdmin(e.target.checked);
     console.log(!admin);
@@ -44,6 +46,11 @@ function Signup() {
           nav("/login");
         });
   };
+
+  useEffect(() => {
+    const token = cookies.get("token")
+    if (token) nav("/")
+  }, [])
   return (
       <AuthContainer>
         <Header>O N E C L I C K</Header>

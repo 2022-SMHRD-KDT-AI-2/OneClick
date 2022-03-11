@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import styled from "@emotion/styled";
-
-const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const DataName = styled.div``;
-
-const Data = styled.input``;
+import { TableContainer, TableName, TableContent } from "../../styles";
 
 function ShopInfo({ dataName, data }) {
   const [edit, setEdit] = useState("");
@@ -17,10 +8,12 @@ function ShopInfo({ dataName, data }) {
     console.log(e.target.value);
   };
   return (
-    <InfoContainer>
-      <DataName>{dataName}</DataName>
-      <Data defaultValue={data} onChange={onChangeInput} />
-    </InfoContainer>
+    <TableContainer>
+      <TableName>{dataName}</TableName>
+      <TableContent>
+        <input defaultValue={data} onChange={onChangeInput} />
+      </TableContent>
+    </TableContainer>
   );
 }
 

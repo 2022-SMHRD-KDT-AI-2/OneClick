@@ -7,15 +7,15 @@ import Signup from "./pages/signup";
 import Main from "./pages/main";
 
 function App() {
-    return (
-        <CookiesProvider>
-            <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/login" element={<Login />} />
-            </Routes>
-        </CookiesProvider>
-    );
+  return (
+    <CookiesProvider>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </CookiesProvider>
+  );
 }
 
 export default App;

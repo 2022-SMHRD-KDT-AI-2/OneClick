@@ -1,33 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { userData } from "../../../atom/atom";
 import { useRecoilValue } from "recoil";
-import styled from "@emotion/styled";
 import ResultTable from "./resultTable";
 import ShopInfo from "./shopInfo";
-
-const ModalBackground = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 10;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-`;
-
-const AdminModal = styled.div`
-  width: 60%;
-  height: 80%;
-  border-radius: 20px;
-  background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  display: flex;
-  flex-direction: column;
-  padding: 25px;
-`;
+import { ModalBackground } from "../../../styles";
+import { AdminModal, ModalButton } from "../styles";
 
 const data = [
   { title: "asdf", addr: "asdf" },
@@ -47,8 +24,6 @@ const shopInfo = {
   addr: "asdf",
   desc: "asdf",
 };
-
-const Button = styled.button``;
 
 function Admin({ setOpenModal }) {
   const user = useRecoilValue(userData);
@@ -94,8 +69,8 @@ function Admin({ setOpenModal }) {
           </div>
         )}
         <div>
-          <Button>수정</Button>
-          <Button onClick={() => setOpenModal(false)}>취소</Button>
+          <ModalButton>수정</ModalButton>
+          <ModalButton onClick={() => setOpenModal(false)}>취소</ModalButton>
         </div>
       </AdminModal>
     </ModalBackground>

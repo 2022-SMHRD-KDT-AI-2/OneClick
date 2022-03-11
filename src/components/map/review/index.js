@@ -149,7 +149,7 @@ function Review({ data }) {
                 <Label>만족도</Label>
                 {reviewTitle.map((item, index) => {
                   return (
-                    <div>
+                    <div key={index}>
                       <div>{item}</div>
                       <div>{star(reviewScore[index])}</div>
                       <div>{reviewScore[index]}</div>

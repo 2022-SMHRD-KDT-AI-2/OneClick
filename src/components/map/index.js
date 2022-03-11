@@ -1,13 +1,10 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import ReactDOMServer from "react-dom/server";
-import { getIconHTML } from "../../utils/getIconHTML";
 import { Shop } from "./Shop";
 
 function Map() {
   const mapRef = useRef(null);
   const { Tmapv2 } = window;
-
-  const html = getIconHTML("🍚", "가게이름", "기타정보");
 
   const initTMap = useCallback(() => {
     // 먼저 지도를 생성 후 중심좌표 설정 >> ui 깨짐을 방지하기 위함
@@ -50,7 +47,6 @@ function Map() {
 
   useEffect(() => {
     initTMap();
-    console.log(ReactDOMServer.renderToString(<modal />));
   }, [initTMap]);
 
   return <div id="TMap" />;
