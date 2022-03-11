@@ -1,41 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./modal.css";
-import StarRating from "./StarRating";
 import "./StarRating";
 
-function AddReview({ setOpenModal, id }) {
+import { comment } from "../../../utils/data";
+import styled from "@emotion/styled";
+
+const Image = styled.img`
+  width: 200px;
+  height: 200px;
+`;
+
+function AddReview({ id }) {
   const reviewPoints = ["맛", "가격", "청결도", "접근성", "분위기"];
+  const [commentState, setCommentState] = useState([
+    {
+      0: false,
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+    },
+  ]);
 
-  const oneReview = [
-    "🙂'음식이 맛있어요'",
-    "🖼'인테리어가 멋져요'",
-    "🍽'혼밥하기 좋아요'",
-    "💳'가성비가 좋아요'",
-    "🌱'매장이 청결해요'",
-    "🏩'매장이 넓어요'",
-    "🚗'주차하기 편해요'",
-    "💐'특별한 날 가기 좋아요'",
-    "📷'사진이 잘 나와요'",
-    "👍🏻'친절해요'",
-  ];
-
-  const [imgBase64, setImgBase64] = useState(""); // 파일 base64
-  const [imgFile, setImgFile] = useState(null); //파일
-  // 테두리 하이라이트 함수
-
-  const handleChangeFile = (event) => {
-    let reader = new FileReader();
-    reader.onloadend = () => {
-      // 2. 읽기가 완료되면 아래코드가 실행됩니다.
-      const base64 = reader.result;
-      if (base64) {
-        setImgBase64(base64.toString()); // 파일 base64 상태 업데이트
-      }
-    };
-    if (event.target.files[0]) {
-      reader.readAsDataURL(event.target.files[0]); // 1. 파일을 읽어 버퍼에 저장합니다.
-      setImgFile(event.target.files[0]); // 파일 상태 업데이트
-    }
+  const onClickComment = (e) => {
+    console.log("asdf");
+    let temp = commentState.slice();
+    temp[0][e.target.name] = !temp[0][e.target.name];
+    setCommentState([...temp]);
   };
 
   return (
@@ -74,7 +70,14 @@ function AddReview({ setOpenModal, id }) {
                     </p>
                   </div>
                   <div style={{ display: "flex", flexDirection: "column" }}>
-                    <StarRating />
+                    <div>
+                      <input
+                        id={id + reviewPoints[key]}
+                        defaultValue={0}
+                        style={{ width: "30px" }}
+                      />
+                      / 5
+                    </div>
                   </div>
                 </div>
               );
@@ -82,7 +85,7 @@ function AddReview({ setOpenModal, id }) {
           </p>
           <p className="body">
             <h3 style={{ margin: 4 }}>사진리뷰</h3>
-            <input type="file" accept="image/*" onChange={handleChangeFile} />
+            <input id={`${id}selectImage`} type="file" accept="image/*" />
             <div
               className="img"
               style={{
@@ -90,30 +93,30 @@ function AddReview({ setOpenModal, id }) {
                 flexDirection: "row",
               }}
             >
-              <img className="boximg" src={imgBase64}></img>
+              <Image id={`${id}image`}></Image>
             </div>
           </p>
         </div>
         <div className="reviewList">
           <h3 style={{ margin: 10 }}>한줄평</h3>
-          {oneReview.map((item, key) => {
+          {comment.map((item, key) => {
             return (
-              <button
+              <div
+                id={`${id}addReview_comment${key}`}
+                name={key}
+                key={key}
+                value={false}
                 className="box"
-                style={{
-                  backgroundColor: "white",
-                  borderRadius: "40px",
-                }}
               >
                 {item}
-              </button>
+              </div>
             );
           })}
         </div>
       </div>
       <div className="footer">
-        <button>등록</button>
-        <button id={`${id}closeAddReview`}> 취소</button>
+        <button id={`${id}submitReview`}>등록</button>
+        <button id={`${id}closeAddReview`}>취소</button>
       </div>
     </div>
   );

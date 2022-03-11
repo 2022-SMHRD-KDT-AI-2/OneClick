@@ -99,76 +99,78 @@ function Review({ data }) {
   }
 
   return (
-    <InfoWindowContainer>
-      <Closebutton id={id}>❌</Closebutton>
-      <Header>
-        <Image />
-        <ShopInfo>
-          <ColumnDiv>
-            <Label>상호</Label>
-            <Label>분류</Label>
-            <Label>주소</Label>
-            <Label>연락처</Label>
-            <Label>SNS</Label>
-            <Label>영업시간</Label>
-            <Label>브레이크타임</Label>
-            <Label>휴무일</Label>
-            <Label>주차</Label>
-          </ColumnDiv>
-          <ColumnDiv>
-            <Label>{title}</Label>
-            <Label>{category}</Label>
-            <Label>{addr}</Label>
-            <Label>{tell}</Label>
-            <Label>{sns}</Label>
-            <Label>{opTime}</Label>
-            <Label>{breaktime}</Label>
-            <Label>{hoilday}</Label>
-            <Label>{parking}</Label>
-          </ColumnDiv>
-        </ShopInfo>
-        <div>
-          <Label>혼잡도</Label>
-          <Circle />
-          <Label>좌석</Label>
-          <div>
-            {5}/{5}
-          </div>
-        </div>
-      </Header>
-      <Contents>
-        <RowDiv>
-          <ColumnDiv>
-            {comment.map((item, key) => {
-              return <div key={key}>{item}</div>;
-            })}
-          </ColumnDiv>
-          <ColumnDiv>
+    <div>
+      <InfoWindowContainer>
+        <Closebutton id={id}>❌</Closebutton>
+        <Header>
+          <Image />
+          <ShopInfo>
             <ColumnDiv>
-              <Label>만족도</Label>
-              {reviewTitle.map((item, index) => {
-                return (
-                  <div>
-                    <div>{item}</div>
-                    <div>{star(reviewScore[index])}</div>
-                    <div>{reviewScore[index]}</div>
-                  </div>
-                );
-              })}
-              <ImageContainer>
-                <Image />
-              </ImageContainer>
+              <Label>상호</Label>
+              <Label>분류</Label>
+              <Label>주소</Label>
+              <Label>연락처</Label>
+              <Label>SNS</Label>
+              <Label>영업시간</Label>
+              <Label>브레이크타임</Label>
+              <Label>휴무일</Label>
+              <Label>주차</Label>
             </ColumnDiv>
-          </ColumnDiv>
-        </RowDiv>
-      </Contents>
-      <Footer>
-        <Button id={`${id}addReview`}>리뷰작성</Button>
-        <Button>주차장찾기</Button>
-        <Button>차량길찾기</Button>
-        <Button>도보길찾기</Button>
-      </Footer>
-    </InfoWindowContainer>
+            <ColumnDiv>
+              <Label>{title}</Label>
+              <Label>{category}</Label>
+              <Label>{addr}</Label>
+              <Label>{tell}</Label>
+              <Label>{sns}</Label>
+              <Label>{opTime}</Label>
+              <Label>{breaktime}</Label>
+              <Label>{hoilday}</Label>
+              <Label>{parking}</Label>
+            </ColumnDiv>
+          </ShopInfo>
+          <div>
+            <Label>혼잡도</Label>
+            <Circle />
+            <Label>좌석</Label>
+            <div>
+              {5}/{5}
+            </div>
+          </div>
+        </Header>
+        <Contents>
+          <RowDiv>
+            <ColumnDiv>
+              {comment.map((item, key) => {
+                return <div key={key}>{item}</div>;
+              })}
+            </ColumnDiv>
+            <ColumnDiv>
+              <ColumnDiv>
+                <Label>만족도</Label>
+                {reviewTitle.map((item, index) => {
+                  return (
+                    <div>
+                      <div>{item}</div>
+                      <div>{star(reviewScore[index])}</div>
+                      <div>{reviewScore[index]}</div>
+                    </div>
+                  );
+                })}
+                <ImageContainer>
+                  <Image />
+                </ImageContainer>
+              </ColumnDiv>
+            </ColumnDiv>
+          </RowDiv>
+        </Contents>
+        <Footer>
+          <Button id={`${id}addReview`}>리뷰작성</Button>
+          <Button>주차장찾기</Button>
+          <Button>차량길찾기</Button>
+          <Button>도보길찾기</Button>
+        </Footer>
+      </InfoWindowContainer>
+    </div>
   );
 }
 

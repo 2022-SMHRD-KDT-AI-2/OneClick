@@ -3,6 +3,7 @@ import { renderToString } from "react-dom/server";
 import AddReview from "./addReview";
 import Marker from "./marker";
 import Review from "./review";
+import { reviewTitle } from "../../utils/data";
 
 const { Tmapv2 } = window;
 
@@ -43,6 +44,54 @@ export class Shop {
       .addEventListener("click", () => {
         this.review.setVisible(false);
         this.addReview.setVisible(true);
+
+        document
+          .getElementById(this.data.id + "selectImage")
+          .addEventListener("change", (e) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onload = () => {
+              let img = document.getElementById(this.data.id + "image");
+              img.src = reader.result;
+              //img.width = "150px";
+              //img.height = "150px";
+            };
+          });
+
+        for (let i = 0; i < 10; i += 1) {
+          let comment = document.getElementById(
+            this.data.id + "addReview_comment" + i
+          );
+          comment.addEventListener("click", (e) => {
+            e.target.value = !e.target.value;
+            if (e.target.value) {
+              comment.style.border = "1px solid red";
+            } else {
+              comment.style.border = "1px solid black";
+            }
+          });
+        }
+
+        document
+          .getElementById(this.data.id + "submitReview")
+          .addEventListener("click", () => {
+            const score = [];
+            const comment = [];
+            reviewTitle.forEach((item, index) => {
+              score.push(document.getElementById(this.data.id + item).value);
+            });
+            for (let i = 0; i < 10; i++) {
+              if (
+                document.getElementById(this.data.id + "addReview_comment" + i)
+                  .value
+              ) {
+                comment.push(i);
+              }
+            }
+            console.log(score);
+            console.log(comment);
+          });
+
         document
           .getElementById(this.data.id + "closeAddReview")
           .addEventListener("click", () => {
