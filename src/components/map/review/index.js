@@ -1,95 +1,175 @@
-import React,{useState,useEffect} from "react";
-import "./modal.css";
-import StarRating from "./StarRating";
-import "./StarRating";
+import React, { useState } from "react";
 
-function Review({ setOpenModal }) {
-    const reviewPoints = ["맛","가격","청결도","접근성","분위기"]
+import styled from "@emotion/styled";
+import { comment, reviewTitle } from "../../../utils/data";
 
-    const oneReview =["🙂'음식이 맛있어요'","🖼'인테리어가 멋져요'","🍽'혼밥하기 좋아요'","💳'가성비가 좋아요'",
-                      "🌱'매장이 청결해요'","🏩'매장이 넓어요'","🚗'주차하기 편해요'","💐'특별한 날 가기 좋아요'",
-                      "📷'사진이 잘 나와요'","👍🏻'친절해요'"]
+const reviewScore = [4.1, 2.5, 3.3, 5, 1];
 
-    const [imgBase64, setImgBase64] = useState(""); // 파일 base64
-    const [imgFile, setImgFile] = useState(null);	//파일	
-    // 테두리 하이라이트 함수
+const InfoWindowContainer = styled.div`
+  width: 800px;
+  height: 800px;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+`;
 
-    const handleChangeFile = (event) => {
-    let reader = new FileReader();
-    reader.onloadend = () => {
-      // 2. 읽기가 완료되면 아래코드가 실행됩니다.
-      const base64 = reader.result;
-      if (base64) {
-        setImgBase64(base64.toString()); // 파일 base64 상태 업데이트
-       }
+const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  > img {
+    width: 300px;
+    height: 300px;
+  }
+`;
+
+const Contents = styled.div``;
+
+const Footer = styled.div``;
+
+const Button = styled.button``;
+
+const Label = styled.label``;
+
+const ShopInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ColumnDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const RowDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Circle = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  background-color: green;
+`;
+
+const ImageContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Image = styled.img`
+  height: 150px;
+  width: 150px;
+`;
+
+const Closebutton = styled.button`
+  position: absolute;
+  font-size: 1rem;
+  background-color: white;
+  border: 0px;
+  right: 10px;
+  top: 10px;
+`;
+
+function Review({ data }) {
+  const {
+    id,
+    title,
+    addr,
+    category,
+    tell,
+    sns,
+    opTime,
+    breaktime,
+    hoilday,
+    parking,
+  } = data;
+
+  function star(number) {
+    const num = Math.round(number);
+    let result = "";
+    for (let i = 1; i <= num; i++) {
+      result += "⭐";
     }
-      if (event.target.files[0]) {
-      reader.readAsDataURL(event.target.files[0]); // 1. 파일을 읽어 버퍼에 저장합니다.
-      setImgFile(event.target.files[0]); // 파일 상태 업데이트
-       } 
-    }
+    return result;
+  }
 
-    return (
-
-        <div className="modalContainer">
-          <div style={{
-            display:"flex",
-            flexDirection:"row"
-          }}>
-            <div className="firstbox" style={{
-              width:"60%"
-            }}>
-            <p className="title">
-              <h3 style={{margin:10}}>평가</h3>
-              {reviewPoints.map((item, key) => {
-                return (
-                  <div style={{
-                    display: "flex",
-                    flexDirection: "row"
-                  }}>
-                      <div>
-                       <p style={{
-                          width:"50px",margin:4,textAlign:"center"
-                        }}>{item}
-                       </p>
-                      </div>
-                      <div style={{display:"flex",flexDirection:"column"}}>
-                      <StarRating/>
-                      </div>
-                  </div>
-                )
-              })}
-            </p>
-            <p className="body">
-              <h3 style={{margin:4}}>사진리뷰</h3>
-              <input type="file" accept="image/*" onChange={handleChangeFile}/>
-              <div className="img" style={{
-                display:"flex",flexDirection:"row"
-              }}>
-                <img className="boximg" src={imgBase64} ></img>
-              </div>
-            </p>
-            </div>
-            <div className="reviewList">
-              <h3 style={{margin:10}}>한줄평</h3>
-              {oneReview.map((item,key) => {
-                return (
-                  <button className="box" style={{
-                    backgroundColor:"white",
-                    borderRadius:"40px"
-                  }}>{item}</button>
-                )
-              })}
-            </div>
-          </div>
-          <div className="footer" >
-            <button>등록</button>
-            <button id="cancelBtn"> 취소 </button>
+  return (
+    <InfoWindowContainer>
+      <Closebutton id={id}>❌</Closebutton>
+      <Header>
+        <Image />
+        <ShopInfo>
+          <ColumnDiv>
+            <Label>상호</Label>
+            <Label>분류</Label>
+            <Label>주소</Label>
+            <Label>연락처</Label>
+            <Label>SNS</Label>
+            <Label>영업시간</Label>
+            <Label>브레이크타임</Label>
+            <Label>휴무일</Label>
+            <Label>주차</Label>
+          </ColumnDiv>
+          <ColumnDiv>
+            <Label>{title}</Label>
+            <Label>{category}</Label>
+            <Label>{addr}</Label>
+            <Label>{tell}</Label>
+            <Label>{sns}</Label>
+            <Label>{opTime}</Label>
+            <Label>{breaktime}</Label>
+            <Label>{hoilday}</Label>
+            <Label>{parking}</Label>
+          </ColumnDiv>
+        </ShopInfo>
+        <div>
+          <Label>혼잡도</Label>
+          <Circle />
+          <Label>좌석</Label>
+          <div>
+            {5}/{5}
           </div>
         </div>
-        
-
-    );
-  }
+      </Header>
+      <Contents>
+        <RowDiv>
+          <ColumnDiv>
+            {comment.map((item, key) => {
+              return <div key={key}>{item}</div>;
+            })}
+          </ColumnDiv>
+          <ColumnDiv>
+            <ColumnDiv>
+              <Label>만족도</Label>
+              {reviewTitle.map((item, index) => {
+                return (
+                  <div>
+                    <div>{item}</div>
+                    <div>{star(reviewScore[index])}</div>
+                    <div>{reviewScore[index]}</div>
+                  </div>
+                );
+              })}
+              <ImageContainer>
+                <Image />
+              </ImageContainer>
+            </ColumnDiv>
+          </ColumnDiv>
+        </RowDiv>
+      </Contents>
+      <Footer>
+        <Button id={`${id}addReview`}>리뷰작성</Button>
+        <Button>주차장찾기</Button>
+        <Button>차량길찾기</Button>
+        <Button>도보길찾기</Button>
+      </Footer>
+    </InfoWindowContainer>
+  );
+}
 
 export default Review;

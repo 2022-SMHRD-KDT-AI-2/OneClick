@@ -1,19 +1,8 @@
 import styled from "@emotion/styled";
 import { renderToString } from "react-dom/server";
-import Review from "./review";
+import AddReview from "./addReview";
 import Marker from "./marker";
-
-const MarkerContainer = styled.div`
-  background-color: white;
-  border-radius: 25px;
-  display: flex;
-  flex-direction: row;
-  width: 120px;
-  height: 50px;
-  padding: 0 10px;
-  align-items: center;
-  border: 2px solid #2b6bf3;
-`;
+import Review from "./review";
 
 const { Tmapv2 } = window;
 
@@ -31,20 +20,48 @@ export class Shop {
     });
   };
 
-  setReviewModal = () => {
+  setReview = () => {
     this.review = new Tmapv2.InfoWindow({
       position: this.data.loc,
       background: false,
       border: "0px solid white",
-      content: renderToString(<Review />),
+      content: renderToString(<Review data={this.data} />),
       type: 2,
       align: 15,
       visible: false,
       map: this.map,
     });
-
+    this.setAddReview();
+    document.getElementById(this.data.id).addEventListener("click", () => {
+      this.review.setVisible(false);
+    });
     this.marker.addListener("click", () => {
       this.review.setVisible(true);
+    });
+    document
+      .getElementById(this.data.id + "addReview")
+      .addEventListener("click", () => {
+        this.review.setVisible(false);
+        this.addReview.setVisible(true);
+        document
+          .getElementById(this.data.id + "closeAddReview")
+          .addEventListener("click", () => {
+            this.addReview.setVisible(false);
+            this.review.setVisible(true);
+          });
+      });
+  };
+
+  setAddReview = () => {
+    this.addReview = new Tmapv2.InfoWindow({
+      position: this.data.loc,
+      background: false,
+      border: "0px solid white",
+      content: renderToString(<AddReview id={this.data.id} />),
+      type: 2,
+      align: 15,
+      visible: false,
+      map: this.map,
     });
   };
 }
