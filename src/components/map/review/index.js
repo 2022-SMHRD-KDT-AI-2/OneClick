@@ -147,7 +147,7 @@ const Image = styled.img`
   width: 220px;
 `;
 
-const Closebutton = styled.button`
+const CloseButton = styled.button`
   position: absolute;
   font-size: 1rem;
   background-color: white;
@@ -159,15 +159,17 @@ const Closebutton = styled.button`
 function Review({ data }) {
   const {
     id,
-    title,
-    addr,
-    category,
+    name,
+    address,
+    upperBizName,
     tell,
-    sns,
+    url,
     opTime,
     breaktime,
     hoilday,
     parking,
+    table,
+    occupied_table,
   } = data;
 
   function star(number) {
@@ -179,83 +181,17 @@ function Review({ data }) {
     return result;
   }
 
+  function emptyCheck(str, index) {
+    return str ? (
+      <Label key={index}>{str}</Label>
+    ) : (
+      <Label key={index}>{" - "}</Label>
+    );
+  }
+
   return (
-<<<<<<< Updated upstream
-    <div>
-      <InfoWindowContainer>
-        <Closebutton id={id}>❌</Closebutton>
-        <Header>
-          <Image />
-          <ShopInfo>
-            <ColumnDiv>
-              <Label>상호</Label>
-              <Label>분류</Label>
-              <Label>주소</Label>
-              <Label>연락처</Label>
-              <Label>SNS</Label>
-              <Label>영업시간</Label>
-              <Label>브레이크타임</Label>
-              <Label>휴무일</Label>
-              <Label>주차</Label>
-            </ColumnDiv>
-            <ColumnDiv>
-              <Label>{title}</Label>
-              <Label>{category}</Label>
-              <Label>{addr}</Label>
-              <Label>{tell}</Label>
-              <Label>{sns}</Label>
-              <Label>{opTime}</Label>
-              <Label>{breaktime}</Label>
-              <Label>{hoilday}</Label>
-              <Label>{parking}</Label>
-            </ColumnDiv>
-          </ShopInfo>
-          <div>
-            <Label>혼잡도</Label>
-            <Circle />
-            <Label>좌석</Label>
-            <div>
-              {5}/{5}
-            </div>
-          </div>
-        </Header>
-        <Contents>
-          <RowDiv>
-            <ColumnDiv>
-              {comment.map((item, key) => {
-                return <div key={key}>{item}</div>;
-              })}
-            </ColumnDiv>
-            <ColumnDiv>
-              <ColumnDiv>
-                <Label>만족도</Label>
-                {reviewTitle.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      <div>{item}</div>
-                      <div>{star(reviewScore[index])}</div>
-                      <div>{reviewScore[index]}</div>
-                    </div>
-                  );
-                })}
-                <ImageContainer>
-                  <Image />
-                </ImageContainer>
-              </ColumnDiv>
-            </ColumnDiv>
-          </RowDiv>
-        </Contents>
-        <Footer>
-          <Button id={`${id}addReview`}>리뷰작성</Button>
-          <Button>주차장찾기</Button>
-          <Button>차량길찾기</Button>
-          <Button>도보길찾기</Button>
-        </Footer>
-      </InfoWindowContainer>
-    </div>
-=======
     <InfoWindowContainer>
-      <Closebutton id={id}>❌</Closebutton>
+      <CloseButton id={id}>❌</CloseButton>
       <Header>
         <Image />
         <ShopInfo>
@@ -286,21 +222,19 @@ function Review({ data }) {
                 <Label>주차공간</Label>
               </ColumnDiv>
               <ColumnDiv>
-                <Label>{title}</Label>
-                <Label>{category}</Label>
-                <Label>{addr}</Label>
-                <Label>{tell}</Label>
-                <Label>{sns}</Label>
-                <Label>{opTime}</Label>
-                <Label>{breaktime}</Label>
-                <Label
-                  style={{
-                    color: "red",
-                  }}
-                >
-                  {hoilday}
-                </Label>
-                <Label>{parking}</Label>
+                {[
+                  name,
+                  upperBizName,
+                  address,
+                  tell,
+                  url,
+                  opTime,
+                  breaktime,
+                  hoilday,
+                  parking,
+                ].map((item, index) => {
+                  return emptyCheck(item, index);
+                })}
               </ColumnDiv>
             </RowDiv>
           </ColumnDiv>
@@ -340,7 +274,7 @@ function Review({ data }) {
               fontSize: "20px",
             }}
           >
-            {5}/{5}
+            {emptyCheck(occupied_table, 0)} / {emptyCheck(table, 0)}
           </div>
         </div>
       </Header>
@@ -426,6 +360,29 @@ function Review({ data }) {
             </ImageContainer>
           </ColumnDiv>
         </RowDiv>
+        <div
+          style={{
+            width: "200px",
+            height: "200px",
+            overflow: "scroll",
+          }}
+        >
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+          <div>asdfasdf</div>
+        </div>
       </Contents>
       <Footer
         style={{
@@ -438,7 +395,6 @@ function Review({ data }) {
         <ButtonsClick>도보길찾기</ButtonsClick>
       </Footer>
     </InfoWindowContainer>
->>>>>>> Stashed changes
   );
 }
 

@@ -3,11 +3,11 @@ import styled from "@emotion/styled";
 
 const MarkerContainer = styled.div`
   background-color: white;
-  border-radius: 25px;
+  border-radius: 12px;
   display: flex;
   flex-direction: row;
-  width: 120px;
-  height: 50px;
+  width: 90px;
+  height: 35px;
   padding: 0 10px;
   align-items: center;
   border: 2px solid #2b6bf3;
@@ -21,12 +21,13 @@ const MarkerInfo = styled.div`
   font-size: 16px;
 `;
 
-function Marker({ title, info }) {
+function Marker({ data }) {
+  const { name, upperBizName } = data;
   return (
     <MarkerContainer>
       <MarkerInfo>
-        <span>{title}</span>
-        <span>{info}</span>
+        <span>{name}</span>
+        <span>{upperBizName}</span>
       </MarkerInfo>
     </MarkerContainer>
   );

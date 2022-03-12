@@ -15,15 +15,15 @@ export class Shop {
 
   setMarker = () => {
     this.marker = new Tmapv2.Marker({
-      position: this.data.loc,
-      iconHTML: renderToString(<Marker />),
+      position: new Tmapv2.LatLng(this.data.lat, this.data.long),
+      iconHTML: renderToString(<Marker data={this.data} />),
       map: this.map,
     });
   };
 
   setReview = () => {
     this.review = new Tmapv2.InfoWindow({
-      position: this.data.loc,
+      position: new Tmapv2.LatLng(this.data.lat, this.data.long),
       background: false,
       border: "0px solid white",
       content: renderToString(<Review data={this.data} />),
@@ -101,7 +101,7 @@ export class Shop {
 
   setAddReview = () => {
     this.addReview = new Tmapv2.InfoWindow({
-      position: this.data.loc,
+      position: new Tmapv2.LatLng(this.data.lat, this.data.long),
       background: false,
       border: "0px solid white",
       content: renderToString(<AddReview id={this.data.id} />),
