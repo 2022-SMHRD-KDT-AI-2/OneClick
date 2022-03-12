@@ -63,9 +63,12 @@ export class Shop {
           comment.addEventListener("click", (e) => {
             e.target.value = !e.target.value;
             if (e.target.value) {
-              comment.style.border = "1px solid red";
+              comment.style.border = "1px solid #007cb9";
+              comment.style.backgroundColor ="007cb9"
+              comment.style.borderRadius = "20px";
             } else {
-              comment.style.border = "1px solid black";
+              comment.style.border = "1px solid white";
+              comment.style.color ="black"
             }
           });
         }

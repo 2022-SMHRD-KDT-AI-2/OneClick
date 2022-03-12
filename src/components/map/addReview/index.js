@@ -4,8 +4,9 @@ import { comment, reviewTitle } from "../../../utils/data";
 import styled from "@emotion/styled";
 
 const Image = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
+  margin: 10px;
 `;
 
 function AddReview({ id }) {
@@ -21,10 +22,11 @@ function AddReview({ id }) {
           className="firstbox"
           style={{
             width: "60%",
+            textAlign:"center"
           }}
         >
           <p className="title">
-            <h3 style={{ margin: 10 }}>평가</h3>
+            <h3 style={{ margin: 7, fontSize:20}}>평가</h3>
             {reviewTitle.map((item, key) => {
               return (
                 <div
@@ -32,6 +34,7 @@ function AddReview({ id }) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
+                    justifyContent:"center"
                   }}
                 >
                   <div>
@@ -60,21 +63,22 @@ function AddReview({ id }) {
             })}
           </p>
           <p className="body">
-            <h3 style={{ margin: 4 }}>사진리뷰</h3>
-            <input id={`${id}selectImage`} type="file" accept="image/*" />
+            <h3 style={{ margin: 6, fontSize:20 }}>사진리뷰</h3>
+            <input id={`${id}selectImage`} type="file" accept="image/*"/>
             <div
               className="img"
               style={{
                 display: "flex",
                 flexDirection: "row",
+                justifyContent:"center"
               }}
             >
               <Image id={`${id}image`}></Image>
             </div>
           </p>
         </div>
-        <div className="reviewList">
-          <h3 style={{ margin: 10 }}>한줄평</h3>
+        <div className="reviewList" style={{textAlign:"center"}}>
+          <h3 style={{ margin: 7,fontSize:20 }}>한줄평</h3>
           {comment.map((item, key) => {
             return (
               <div
@@ -83,6 +87,7 @@ function AddReview({ id }) {
                 key={key}
                 value={false}
                 className="box"
+                style={{margin:6}}
               >
                 {item}
               </div>
