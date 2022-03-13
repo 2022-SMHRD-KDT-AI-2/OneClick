@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { ModalContainer } from "../../styles";
+import { categoryColors } from "../../utils/data";
 
 export const ButtonsContainer = styled.div`
   min-width: 900px;
@@ -31,10 +32,8 @@ export const Select = styled.select`
   width: 100%;
   color: rgba(var(--sk_primary_foreground, 29, 28, 29), 1);
   background-color: rgba(var(--sk_primary_background, 255, 255, 255), 1);
-  padding: 12px;
+  padding: 11px 12px 13px 12px;
   height: 44px;
-  padding-top: 11px;
-  padding-bottom: 13px;
   font-size: 18px;
   line-height: 1.33333333;
 `;
@@ -55,7 +54,7 @@ export const ButtonContainer = styled.button`
   width: 100px;
   text-align: center;
   margin-left: 5px;
-  background-color: #2b6bf3;
+  background-color: ${categoryColors.button};
   color: white;
   font-weight: bold;
   font-size: 20px;

@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import Button from "./button";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { shopData, userData } from "../../atom/atom";
 import PresetModal from "./presetModal";
 import { ButtonsContainer } from "./styles";
 import axios from "axios";
+import { defaultPreset } from "../../utils/data";
 
 function Buttons() {
-  const [user, setUser] = useRecoilState(userData);
   const [openModal, setOpenModal] = useState(false);
   const [shop, setShop] = useRecoilState(shopData);
+  const user = useRecoilValue(userData);
   const onClickSearch = () => {
     axios
       .post("http://localhost:7501/shops/search", {
@@ -22,9 +23,13 @@ function Buttons() {
   };
   return (
     <ButtonsContainer>
-      {user.preset.map((item, index) => {
-        return <Button key={index} title={item.keyword} />;
-      })}
+      {user.data
+        ? user.preset.map((item, index) => {
+            return <Button key={index} title={item.keyword} />;
+          })
+        : defaultPreset.map((item, index) => {
+            return <Button key={index} title={item.keyword}></Button>;
+          })}
       <button onClick={onClickSearch}>search</button>
       <Button title="+" toggle={setOpenModal} />
       {openModal && <PresetModal setOpenModal={setOpenModal} />}

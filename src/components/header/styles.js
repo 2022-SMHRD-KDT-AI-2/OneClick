@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { ModalContainer } from "../../styles";
+import { LinkContainer } from "../../pages/login/styles";
 
 export const TableContainer = styled.div`
   display: flex;
@@ -35,8 +36,10 @@ export const Logo = styled.h3`
   width: 80%;
 `;
 
-export const Link = styled.a`
+export const Link = styled(LinkContainer)`
   margin-left: 20px;
+  font-size: 1.5rem;
+  color: black;
 `;
 
 export const HeaderContainer = styled.div`

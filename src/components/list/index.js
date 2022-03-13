@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import ListItem from "./listItem";
+import { useRecoilValue } from "recoil";
+import { shopData } from "../../atom/atom";
 
 const ListContainer = styled.div`
   border-left: 1px solid gray;
@@ -13,46 +15,20 @@ const ListContainer = styled.div`
 `;
 
 function List() {
+  const shop = useRecoilValue(shopData);
+  const [exist, setExist] = useState(false);
+  useEffect(() => {
+    if (shop.data) {
+      setExist(true);
+    }
+  }, [shop.data]);
+
   return (
     <ListContainer>
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
+      {exist &&
+        Object.values(shop.data).map((item, index) => {
+          return <ListItem data={item} key={index} />;
+        })}
     </ListContainer>
   );
 }

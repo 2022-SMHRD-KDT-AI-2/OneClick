@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { categoryColors } from "../../utils/data";
 
 export const AuthContainer = styled.div`
   margin-top: 15%;
@@ -48,12 +49,11 @@ export const Input = styled.input`
   box-sizing: border-box;
   margin: 0 0 20px;
   width: 100%;
-  color: rgba(var(--sk_primary_foreground, 29, 28, 29), 1);
+  color: black;
+  //color: rgba(var(--sk_primary_foreground, 29, 28, 29), 1);
   background-color: rgba(var(--sk_primary_background, 255, 255, 255), 1);
-  padding: 12px;
+  padding: 11px 12px 13px 11px;
   height: 44px;
-  padding-top: 11px;
-  padding-bottom: 13px;
   font-size: 18px;
   line-height: 1.33333333;
 
@@ -69,7 +69,7 @@ export const Button = styled.button`
   width: 100%;
   max-width: 100%;
   color: #fff;
-  background-color: #2b6bf3;
+  background-color: ${categoryColors.button};
   border: none;
   font-size: 18px;
   font-weight: 900;
@@ -84,7 +84,7 @@ export const Button = styled.button`
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 
   &:hover {
-    background-color: rgba(74, 21, 75, 0.9);
+    background-color: #e01e5a;
     border: none;
   }
 
@@ -100,25 +100,12 @@ export const Error = styled.div`
   font-weight: bold;
 `;
 
-export const Success = styled.div`
-  color: #2eb67d;
-  font-weight: bold;
-`;
-
 export const LinkContainer = styled.a`
   font-size: 1.2rem;
-  color: #616061;
+  color: black;
   margin: 0 auto 8px;
-  width: 400px;
-  max-width: 400px;
 
-  & a {
-    color: #1264a3;
-    text-decoration: none;
-    font-weight: 700;
-
-    &:hover {
-      text-decoration: underline;
-    }
+  &:hover {
+    text-decoration: underline;
   }
 `;

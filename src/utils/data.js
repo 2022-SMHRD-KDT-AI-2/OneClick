@@ -25,3 +25,24 @@ export const comment = [
 ];
 
 export const reviewTitle = ["맛", "가격", "청결도", "접근성", "분위기"];
+
+export const defaultPreset = [
+  { keyword: "All", category1: "All", category2: "", category3: "" },
+  { keyword: "All", category1: "All", category2: "", category3: "" },
+  { keyword: "All", category1: "All", category2: "", category3: "" },
+  { keyword: "All", category1: "All", category2: "", category3: "" },
+  { keyword: "All", category1: "All", category2: "", category3: "" },
+];
+
+export const categoryColors = {
+  button: "#4D77FF",
+  clickedButton: "#0E185F",
+  korean: "#E83A14",
+  chinese: "#FDFFA9",
+  Japanese: "#019267",
+  western: "#533E85",
+  asian: "#EEEDDE",
+  cafe: "#CEAB93",
+  bar: "#19282F",
+  default: "#ffffff",
+};

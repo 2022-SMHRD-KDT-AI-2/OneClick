@@ -36,6 +36,7 @@ function Map() {
       );
       mapRef.current.setCenter(loc);
     });
+    new Tmapv2.InfoWindow();
     for (let item of shop.data) {
       const inst = new Shop(mapRef.current, item);
       inst.setMarker();

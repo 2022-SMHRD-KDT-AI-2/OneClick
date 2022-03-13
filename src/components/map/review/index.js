@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import styled from "@emotion/styled";
 import { comment, reviewTitle } from "../../../utils/data";
+import { emptyCheck } from "../../../utils/functions";
 
 const reviewScore = [4.1, 2.5, 3.3, 5, 1];
 
@@ -169,7 +170,7 @@ function Review({ data }) {
     hoilday,
     parking,
     table,
-    occupied_table,
+    occupied_tables,
   } = data;
 
   function star(number) {
@@ -179,14 +180,6 @@ function Review({ data }) {
       result += "⭐";
     }
     return result;
-  }
-
-  function emptyCheck(str, index) {
-    return str ? (
-      <Label key={index}>{str}</Label>
-    ) : (
-      <Label key={index}>{" - "}</Label>
-    );
   }
 
   return (
@@ -274,7 +267,7 @@ function Review({ data }) {
               fontSize: "20px",
             }}
           >
-            {emptyCheck(occupied_table, 0)} / {emptyCheck(table, 0)}
+            {emptyCheck(occupied_tables, 0)} / {emptyCheck(table, 0)}
           </div>
         </div>
       </Header>

@@ -4,12 +4,16 @@ export const userData = atom({
   key: "userData",
   default: {
     admin: false,
-    shop: 12341234,
+    shop: null,
     preset: [],
-    loc: {
-      lat: null,
-      long: null,
-    },
+  },
+});
+
+export const location = atom({
+  key: "location",
+  default: {
+    lat: null,
+    long: null,
   },
 });
 

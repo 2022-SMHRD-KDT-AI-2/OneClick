@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {Cookies} from "react-cookie";
@@ -13,44 +13,45 @@ import {
   Label,
   LinkContainer,
 } from "../login/styles";
+import {FlexRowDiv} from "../../styles";
+import useInputJson from "../../utils/useInputJson";
 
 function Signup() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordCheck, setPasswordCheck] = useState("");
-  const [admin, setAdmin] = useState(false);
-  const cookies = new Cookies()
-  const onChangeCheck = (e) => {
-    setAdmin(e.target.checked);
-    console.log(!admin);
-  };
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-  const onChangePasswordCheck = (e) => {
-    setPasswordCheck(e.target.value);
-  };
+  const [formData, onChangeFormData] = useInputJson({
+    email: "",
+    password: "",
+    passwordCheck: "",
+  });
+  const {email, password, passwordCheck} = formData;
+
   const nav = useNavigate();
+  const cookies = useMemo(() => new Cookies(), []);
+
+  const [admin, setAdmin] = useState(false);
+  const onChangeCheck = (e) => setAdmin(e.target.checked);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    axios
-        .post("http://localhost:7501/users/signup", {
-          email: email,
-          password: password,
-          admin: admin,
-        })
-        .then((res) => {
-          nav("/login");
-        });
+    if (email && password && passwordCheck && passwordCheck == password) {
+      axios
+          .post("http://localhost:7501/users/signup", {
+            email: email,
+            password: password,
+            admin: admin,
+          })
+          .then((res) => {
+            nav("/login");
+          });
+    } else {
+      alert("모든 정보를 입력하여 주세요!");
+    }
   };
 
   useEffect(() => {
-    const token = cookies.get("token")
-    if (token) nav("/")
-  }, [])
+    const token = cookies.get("token");
+    if (token) nav("/");
+  }, []);
+
   return (
       <AuthContainer>
         <Header>O N E C L I C K</Header>
@@ -58,7 +59,12 @@ function Signup() {
           <Label>
             <span>E M A I L</span>
             <div>
-              <Input type="email" value={email} onChange={onChangeEmail}></Input>
+              <Input
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={onChangeFormData}
+              ></Input>
             </div>
             {!email && <Error>Email을 입력해주세요!</Error>}
           </Label>
@@ -66,9 +72,9 @@ function Signup() {
             <span>P A S S W O R D</span>
             <div>
               <Input
-                  type="password"
                   value={password}
-                  onChange={onChangePassword}
+                  name="password"
+                  onChange={onChangeFormData}
               ></Input>
             </div>
           </Label>
@@ -76,9 +82,9 @@ function Signup() {
             <span>P A S S W O R D C H E C K</span>
             <div>
               <Input
-                  type="password"
                   value={passwordCheck}
-                  onChange={onChangePasswordCheck}
+                  name="passwordCheck"
+                  onChange={onChangeFormData}
               ></Input>
             </div>
             {password !== passwordCheck && (
@@ -92,22 +98,23 @@ function Signup() {
             </div>
           </Label>
           <Button type="submit">L O G I N</Button>
-          <LinkContainer
-              onClick={() => {
-                nav("/login");
-              }}
-          >
-            LOGIN
-          </LinkContainer>
-          <LinkContainer
-              onClick={() => {
-                nav("/");
-              }}
-          >
-            MAIN
-          </LinkContainer>
+          <FlexRowDiv>
+            <LinkContainer
+                onClick={() => {
+                  nav("/login");
+                }}
+            >
+              LOGIN
+            </LinkContainer>
+            <LinkContainer
+                onClick={() => {
+                  nav("/");
+                }}
+            >
+              MAIN
+            </LinkContainer>
+          </FlexRowDiv>
         </Form>
-
       </AuthContainer>
   );
 }

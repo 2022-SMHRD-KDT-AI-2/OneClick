@@ -1,80 +1,74 @@
 import React, { useEffect, useState } from "react";
-import { userData } from "../../../atom/atom";
+import { userData, location } from "../../../atom/atom";
 import { useRecoilValue } from "recoil";
-import ResultTable from "./resultTable";
-import ShopInfo from "./shopInfo";
 import { ModalBackground } from "../../../styles";
 import { AdminModal, ModalButton } from "../styles";
-
-const data = [
-  { title: "asdf", addr: "asdf" },
-  { title: "asdf", addr: "asdf" },
-  {
-    title: "asdf",
-    addr: "asdf",
-  },
-  {
-    title: "asasdfasdfasdfasdfasdfdf",
-    addr: "aasdfasdfasdfasdfasdasdfasdfasdfasdfsdf",
-  },
-];
-
-const shopInfo = {
-  title: "asdf",
-  addr: "asdf",
-  desc: "asdf",
-};
+import axios from "axios";
+import styled from "@emotion/styled";
+import Table from "./table";
 
 function Admin({ setOpenModal }) {
   const user = useRecoilValue(userData);
+  const loc = useRecoilValue(location);
   const [hasOwnShop, setHasOwnShop] = useState(false);
   const [hasResult, setHasResult] = useState(false);
+  const [keyword, setKeyword] = useState("");
+  const [page, setPage] = useState(1);
+  const [searchData, setSearchData] = useState(null);
 
+  const onChangeKeyword = (e) => {
+    setKeyword(e.target.value);
+  };
   useEffect(() => {
-    // user.admin  << false to main
-    // user.shop << shop id
     if (user.shop) setHasOwnShop(user.shop);
   }, []);
 
-  const onSubmit = () => {
-    setHasResult(true);
+  const onClickSearchButton = () => {
+    axios
+      .post("http://localhost:7501/shops/keyword", {
+        keyword: keyword,
+        page: page,
+        lat: loc.lat,
+        long: loc.long,
+      })
+      .then((res) => {
+        setSearchData(res.data.data);
+      });
   };
 
   return (
     <ModalBackground onClick={() => setOpenModal(false)}>
       <AdminModal onClick={(e) => e.stopPropagation()}>
-        {hasOwnShop ? (
-          Object.keys(shopInfo).map((item, key) => {
-            return <ShopInfo dataName={item} data={shopInfo[item]} />;
-          })
-        ) : (
+        {hasOwnShop ? null : (
           <div>
             <div>
               <label>가게검색</label>
-              <input />
-              <button onClick={onSubmit}>검색</button>
+              <input value={keyword} onChange={onChangeKeyword} />
+              <button onClick={onClickSearchButton}>검색</button>
             </div>
-            <div>
-              <ResultTable title={"상호명"} addr={"주소"} />
-              {hasResult &&
-                data.map((item, key) => {
-                  return (
-                    <ResultTable
-                      title={item.title}
-                      addr={item.addr}
-                    ></ResultTable>
-                  );
-                })}
-            </div>
+            <div></div>
           </div>
         )}
-        <div>
-          <ModalButton>수정</ModalButton>
-          <ModalButton onClick={() => setOpenModal(false)}>취소</ModalButton>
-        </div>
+        {searchData && (
+          <Table
+            data={searchData.poi}
+            setOpenModal={setOpenModal}
+            page={page}
+            setPage={setPage}
+            setSearchData={setSearchData}
+            keyword={keyword}
+            lat={loc.lat}
+            long={loc.long}
+          />
+        )}
       </AdminModal>
     </ModalBackground>
   );
 }
 
 export default Admin;
+
+/*<div>
+  <ModalButton>수정</ModalButton>
+  <ModalButton onClick={() => setOpenModal(false)}>취소</ModalButton>
+</div>*/
