@@ -5,8 +5,12 @@ export const userData = atom({
   default: {
     admin: false,
     shop: null,
-    preset: [],
   },
+});
+
+export const presetData = atom({
+  key: "presetData",
+  default: [],
 });
 
 export const location = atom({

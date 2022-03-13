@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { Shop } from "./Shop";
 import styled from "@emotion/styled";
 import { useRecoilValue } from "recoil";
 import { shopData } from "../../atom/atom";
 
 const MpaContainer = styled.div`
-  width: 80%;
+  width: calc(80% + 1px);
   height: 100%;
 `;
 
@@ -16,7 +16,7 @@ function Map() {
 
   let shops = [];
 
-  const initTMap = (data) => {
+  const initTMap = useCallback((data) => {
     // 먼저 지도를 생성 후 중심좌표 설정 >> ui 깨짐을 방지하기 위함
     mapRef.current = new Tmapv2.Map("TMap", {
       // 지도의 폭
@@ -43,7 +43,7 @@ function Map() {
       inst.setReview();
       shops.push(inst);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (shop.data) {

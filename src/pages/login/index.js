@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
-import { userData } from "../../atom/atom";
+import { userData, presetData } from "../../atom/atom";
 import { useNavigate } from "react-router-dom";
 import { Cookies } from "react-cookie";
 
@@ -27,6 +27,7 @@ function Login() {
   });
   const { email, password } = formData;
   const setUser = useSetRecoilState(userData);
+  const setPreset = useSetRecoilState(presetData);
   const nav = useNavigate();
   const cookies = useMemo(() => new Cookies(), []);
 
@@ -39,21 +40,23 @@ function Login() {
             email: email,
             password: password,
           })
-          .then((res) => {
-            const { admin, preset, shopId } = res.data;
-            setUser({
-              admin: admin,
-              preset: preset,
-              shop: shopId,
-            });
-            nav("/");
+          .then(async (res) => {
+            if (res.data.success) {
+              const { admin, preset, shopId } = res.data;
+              await setUser({
+                admin: admin,
+                shop: shopId,
+              });
+              await setPreset(preset);
+              nav("/");
+            }
           })
           .catch((err) => console.error(err));
       } else {
         alert("모든 정보를 입력해주세요!");
       }
     },
-    [email, password, nav, setUser]
+    [email, password, nav, setUser, setPreset]
   );
 
   useEffect(() => {

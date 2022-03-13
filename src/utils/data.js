@@ -1,4 +1,4 @@
-export const category = [
+export const categories = [
   "한식",
   "중식",
   "양식",
@@ -6,9 +6,6 @@ export const category = [
   "분식",
   "카페",
   "아시안",
-  "햄버거",
-  "치킨",
-  "피자",
 ];
 
 export const comment = [
@@ -27,11 +24,11 @@ export const comment = [
 export const reviewTitle = ["맛", "가격", "청결도", "접근성", "분위기"];
 
 export const defaultPreset = [
-  { keyword: "All", category1: "All", category2: "", category3: "" },
-  { keyword: "All", category1: "All", category2: "", category3: "" },
-  { keyword: "All", category1: "All", category2: "", category3: "" },
-  { keyword: "All", category1: "All", category2: "", category3: "" },
-  { keyword: "All", category1: "All", category2: "", category3: "" },
+  { keyword: "All", category1: "All" },
+  { keyword: "커피", category1: "카페" },
+  { keyword: "한식", category1: "중식" },
+  { keyword: "일식", category1: "일식" },
+  { keyword: "중식", category1: "중식" },
 ];
 
 export const categoryColors = {

@@ -1,25 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Cookies } from "react-cookie";
 import Admin from "./admin";
 import { Logo, Link, HeaderContainer } from "./styles";
+import axios from "axios";
+import { useSetRecoilState } from "recoil";
+import { presetData, shopData, userData } from "../../atom/atom";
+
+axios.defaults.withCredentials = true;
 
 function Header() {
   const nav = useNavigate();
-  const cookie = new Cookies();
+  const cookies = useMemo(() => new Cookies(), []);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const setUserData = useSetRecoilState(userData);
+  const setPresetData = useSetRecoilState(presetData);
+  const setShopData = useSetRecoilState(shopData);
+
+  const logout = () => {
+    axios.get("http://localhost:7501/users/logout").then((res) => {
+      if (res.data.success) {
+        setIsLoggedIn(false);
+        setUserData(null);
+        setPresetData([]);
+        setShopData([]);
+      }
+    });
+  };
+
   useEffect(() => {
-    if (cookie.get("token")) {
+    if (cookies.get("token")) {
       setIsLoggedIn(true);
     }
-  });
+  }, [cookies]);
   return (
     <HeaderContainer>
       {openModal && <Admin setOpenModal={setOpenModal} />}
       <Logo>OneClick</Logo>
       {isLoggedIn ? (
-        <Link onClick={() => setOpenModal(true)}>ADMIN</Link>
+        <div>
+          <Link onClick={() => setOpenModal(true)}>ADMIN</Link>
+          <Link onClick={logout}>LOGOUT</Link>
+        </div>
       ) : (
         <div>
           <Link

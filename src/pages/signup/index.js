@@ -41,7 +41,7 @@ function Signup() {
             admin: admin,
           })
           .then((res) => {
-            nav("/login");
+            if (res.data.success) nav("/login");
           });
       } else {
         alert("모든 정보를 입력하여 주세요!");

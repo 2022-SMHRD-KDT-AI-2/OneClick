@@ -48,7 +48,7 @@ export const PresetButtons = styled.div`
   }
 `;
 
-export const ButtonContainer = styled.button`
+export const Button = styled.button`
   border-radius: 0.5rem;
   height: 40px;
   width: 100px;
