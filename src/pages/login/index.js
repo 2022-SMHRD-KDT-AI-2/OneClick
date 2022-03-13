@@ -31,19 +31,20 @@ function Login() {
   const cookies = useMemo(() => new Cookies(), []);
 
   const onSubmit = useCallback(
-    (e) => {
+    async (e) => {
       e.preventDefault();
       if (email && password) {
-        axios
+        await axios
           .post("http://localhost:7501/users/login", {
             email: email,
             password: password,
           })
           .then((res) => {
-            const { admin, preset } = res.data;
+            const { admin, preset, shopId } = res.data;
             setUser({
               admin: admin,
               preset: preset,
+              shop: shopId,
             });
             nav("/");
           })
@@ -52,7 +53,7 @@ function Login() {
         alert("모든 정보를 입력해주세요!");
       }
     },
-    [formData, nav, setUser]
+    [email, password, nav, setUser]
   );
 
   useEffect(() => {
