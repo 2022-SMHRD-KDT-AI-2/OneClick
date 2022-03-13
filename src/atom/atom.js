@@ -13,7 +13,7 @@ export const presetData = atom({
   default: [],
 });
 
-export const location = atom({
+export const locationData = atom({
   key: "location",
   default: {
     lat: null,

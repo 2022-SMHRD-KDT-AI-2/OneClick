@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { presetData, shopData } from "../../atom/atom";
 import PresetModal from "./presetModal";
@@ -13,8 +13,6 @@ function Buttons() {
   const setShop = useSetRecoilState(shopData);
   const preset = useRecoilValue(presetData);
   const cookies = useMemo(() => new Cookies(), []);
-
-  const temp = useCallback(() => {}, []);
 
   const onClickSearch = (e) => {
     // 키워드에 맞게 검색하기
