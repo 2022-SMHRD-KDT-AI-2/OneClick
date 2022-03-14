@@ -17,7 +17,7 @@ export const PresetModalContainer = styled(ModalContainer)`
   border-radius: 1rem;
   width: 50%;
   min-width: 500px;
-  min-height: 420px;
+  
   flex-direction: column;
   padding: 1rem;
 `;

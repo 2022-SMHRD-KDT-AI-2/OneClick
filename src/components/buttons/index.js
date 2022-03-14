@@ -14,7 +14,7 @@ function Buttons() {
   const preset = useRecoilValue(presetData);
   const cookies = useMemo(() => new Cookies(), []);
 
-  const onClickSearch = (e) => {
+  const onClickSearch = () => {
     // 키워드에 맞게 검색하기
     axios
       .post("http://localhost:7501/shops/search", {
@@ -22,13 +22,15 @@ function Buttons() {
         long: 126.87626628837687,
       })
       .then((res) => {
+        console.log(res.data);
         setShop(res.data);
       });
   };
 
   useEffect(() => {
     if (cookies.get("token")) setIsLoggedIn(true);
-  }, [cookies]);
+    else setIsLoggedIn(false);
+  }, [preset, cookies]);
 
   return (
     <ButtonsContainer>

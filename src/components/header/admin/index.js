@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { userData, location } from "../../../atom/atom";
+import { userData, location, shopData } from "../../../atom/atom";
 import { useRecoilValue } from "recoil";
 import { FlexRowDiv, ModalBackground } from "../../../styles";
 import { AdminModal } from "../styles";

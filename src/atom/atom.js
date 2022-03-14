@@ -1,4 +1,7 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 export const userData = atom({
   key: "userData",
@@ -6,11 +9,13 @@ export const userData = atom({
     admin: false,
     shop: null,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const presetData = atom({
   key: "presetData",
   default: [],
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const locationData = atom({
@@ -19,9 +24,11 @@ export const locationData = atom({
     lat: null,
     long: null,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const shopData = atom({
   key: "shopData",
   default: [],
+  effects_UNSTABLE: [persistAtom],
 });

@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { renderToString } from "react-dom/server";
 import AddReview from "./addReview";
 import Marker from "./marker";
@@ -64,11 +63,11 @@ export class Shop {
             e.target.value = !e.target.value;
             if (e.target.value) {
               comment.style.border = "1px solid #007cb9";
-              comment.style.backgroundColor ="007cb9"
+              comment.style.backgroundColor = "007cb9";
               comment.style.borderRadius = "20px";
             } else {
               comment.style.border = "1px solid white";
-              comment.style.color ="black"
+              comment.style.color = "black";
             }
           });
         }

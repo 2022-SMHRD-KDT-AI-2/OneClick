@@ -35,7 +35,6 @@ const PageController = styled(FlexRowDiv)`
 
 function SearchShop({ setOpenModal, setHasShop }) {
   const [keyword, onChangeKeyword, setKeyword] = useInput("");
-  const [target, setTarget] = useState("");
   const [page, setPage] = useState(1);
   const [searchedData, setSearchedData] = useState([]);
   const loc = useRecoilValue(locationData);
@@ -64,13 +63,13 @@ function SearchShop({ setOpenModal, setHasShop }) {
       onClickSearchButton();
     }
   };
-  const onClickTableItem = async (e) => {
-    await setTarget(e.target.getAttribute("value"));
+  const onClickTableItem = (e) => {
+    const target = e.target.getAttribute("value");
     axios
       .post("http://localhost:7501/users/shop", { id: target })
-      .then((res) => {
+      .then(async (res) => {
         if (res.data.success) {
-          setUser({
+          await setUser({
             admin: true,
             shop: target,
           });
@@ -97,7 +96,7 @@ function SearchShop({ setOpenModal, setHasShop }) {
           secondBuildNo,
         } = item;
         const addr = `${upperAddrName} ${middleAddrName} ${roadName} ${firstBuildNo} ${
-          secondBuildNo == 0 ? "" : "- " + secondBuildNo
+          secondBuildNo === 0 ? "" : "- " + secondBuildNo
         }`;
         return (
           <Table
