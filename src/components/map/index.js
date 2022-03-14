@@ -36,8 +36,8 @@ function Map() {
     for (let item of shop.data) {
       const inst = new Shop(mapRef.current, item);
       inst.setMarker();
-      inst.setReview();
-      setShops([...shops, inst]);
+      //inst.setReview();
+      //setShops([...shops, inst]);
     }
   }, []);
 
@@ -46,9 +46,7 @@ function Map() {
   }, [initTMap]);
 
   useEffect(() => {
-    if (shop.length > 0) {
-      renderShopInfo();
-    }
+    if (shop.length != []) renderShopInfo();
   }, [shop, renderShopInfo]);
 
   return <MpaContainer id="TMap" />;

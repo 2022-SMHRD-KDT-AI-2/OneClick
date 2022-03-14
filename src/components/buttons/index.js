@@ -6,6 +6,7 @@ import { ButtonsContainer, Button } from "./styles";
 import axios from "axios";
 import { defaultPreset } from "../../utils/data";
 import { Cookies } from "react-cookie";
+import SearchButton from "./searchButton";
 
 function Buttons() {
   const [openModal, setOpenModal] = useState(false);
@@ -35,14 +36,22 @@ function Buttons() {
   return (
     <ButtonsContainer>
       {defaultPreset.map((item, index) => {
-        return <Button key={index}>{item.keyword}</Button>;
+        return (
+          <SearchButton
+            key={index}
+            keyword={item.keyword}
+            category={item.category}
+          />
+        );
       })}
       {isLoggedIn &&
         preset.map((item, index) => {
           return (
-            <Button key={index} onClick={onClickSearch}>
-              {item.keyword}
-            </Button>
+            <SearchButton
+              key={index}
+              keyword={item.keyword}
+              category={item.category}
+            />
           );
         })}
       {isLoggedIn && <Button onClick={() => setOpenModal(true)}>+</Button>}
