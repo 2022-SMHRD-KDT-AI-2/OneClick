@@ -5,7 +5,7 @@ import Buttons from "../../components/buttons";
 import Header from "../../components/header";
 import List from "../../components/list";
 import ListController from "../../components/ListController";
-import Map from "../../components/Map";
+import Map from "../../components/map";
 
 function Main() {
   return (

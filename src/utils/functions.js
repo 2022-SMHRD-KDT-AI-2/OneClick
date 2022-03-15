@@ -1,5 +1,5 @@
 import React from "react";
-import { Label } from "../components/Map/styles";
+import { Label } from "../components/map/styles";
 
 const { Tmapv2 } = window;
 

@@ -4,8 +4,8 @@ import axios from "axios";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { locationData, shopData } from "../../../atom/atom";
 import { URL } from "../../../utils/data";
-import { Shop } from "../../Map/Shop";
-import { createMap, destroyMap } from "../../../utils/functions";
+import { Shop } from "../../map/Shop";
+import { destroyMap } from "../../../utils/functions";
 
 const { Map, LatLng } = window.Tmapv2;
 

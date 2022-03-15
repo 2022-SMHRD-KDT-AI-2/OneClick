@@ -7,7 +7,7 @@ import {
 } from "../../../../styles";
 import { Button, Input, Label } from "../../../../pages/login/styles";
 import styled from "@emotion/styled";
-import { Image } from "../../../Map/styles";
+import { Image } from "../../../map/styles";
 import useSelectImage from "../../../../utils/useSelectImage";
 import { PresetButtons } from "../../../buttons/styles";
 import axios from "axios";
