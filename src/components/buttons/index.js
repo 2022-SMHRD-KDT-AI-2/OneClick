@@ -7,6 +7,7 @@ import axios from "axios";
 import { defaultPreset } from "../../utils/data";
 import { Cookies } from "react-cookie";
 import SearchButton from "./searchButton";
+import { URL } from "../../utils/data";
 
 function Buttons() {
   const [openModal, setOpenModal] = useState(false);
@@ -18,7 +19,7 @@ function Buttons() {
   const onClickSearch = () => {
     // 키워드에 맞게 검색하기
     axios
-      .post("http://localhost:7501/shops/search", {
+      .post(URL + "/shops/search", {
         lat: 35.10928780737578,
         long: 126.87626628837687,
       })

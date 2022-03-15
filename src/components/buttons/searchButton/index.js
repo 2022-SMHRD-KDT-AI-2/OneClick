@@ -3,12 +3,13 @@ import { Button } from "../styles";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { shopData } from "../../../atom/atom";
+import { URL } from "../../../utils/data";
 
 function SearchButton({ keyword, category }) {
   const setShop = useSetRecoilState(shopData);
   const onClickSearchButton = () => {
     axios
-      .post("http://localhost:7501/shops/search", {
+      .post(URL + "/shops/search", {
         lat: 35.10928780737578,
         long: 126.87626628837687,
         keyword: keyword,

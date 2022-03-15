@@ -16,7 +16,7 @@ export class Shop {
   setMarker = () => {
     this.marker = new Tmapv2.Marker({
       position: new Tmapv2.LatLng(this.data.lat, this.data.long),
-      iconHTML: renderToString(<Marker data={this.data} />),
+      iconHTML: renderToString(<Marker data={this.data} key={this.data.id} />),
       map: this.map,
     });
     this.marker.addListener("click", () => {
@@ -25,7 +25,7 @@ export class Shop {
         position: new Tmapv2.LatLng(this.data.lat, this.data.long),
         background: false,
         border: "0px solid white",
-        content: renderToString(<Review data={this.data} />),
+        content: renderToString(<Review data={this.data} key={this.data.id} />),
         type: 2,
         align: 15,
         visible: true,
@@ -45,7 +45,9 @@ export class Shop {
             position: new Tmapv2.LatLng(this.data.lat, this.data.long),
             background: false,
             border: "0px solid white",
-            content: renderToString(<AddReview id={this.data.id} />),
+            content: renderToString(
+              <AddReview id={this.data.id} key={this.data.id} />
+            ),
             type: 2,
             align: 15,
             visible: true,

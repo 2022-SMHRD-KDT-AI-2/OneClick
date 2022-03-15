@@ -6,6 +6,7 @@ import { Logo, Link, HeaderContainer } from "./styles";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { presetData, shopData, userData } from "../../atom/atom";
+import { URL } from "../../utils/data";
 
 axios.defaults.withCredentials = true;
 
@@ -19,7 +20,7 @@ function Header() {
   const setShopData = useSetRecoilState(shopData);
 
   const logout = () => {
-    axios.get("http://localhost:7501/users/logout").then((res) => {
+    axios.get(URL + "/users/logout").then((res) => {
       if (res.data.success) {
         setIsLoggedIn(false);
         setUserData(null);

@@ -43,3 +43,5 @@ export const categoryColors = {
   bar: "#19282F",
   default: "#ffffff",
 };
+
+export const URL = "http://121.147.185.4:7501";

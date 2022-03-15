@@ -20,6 +20,8 @@ function List() {
   useEffect(() => {
     if (shop.data) {
       setExist(true);
+    } else {
+      setExist(false);
     }
   }, [shop.data]);
 

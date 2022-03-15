@@ -15,6 +15,7 @@ import {
 } from "../login/styles";
 import { FlexRowDiv } from "../../styles";
 import useInputJson from "../../utils/useInputJson";
+import { URL } from "../../utils/data";
 
 function Signup() {
   const [formData, onChangeFormData] = useInputJson({
@@ -35,7 +36,7 @@ function Signup() {
       e.preventDefault();
       if (email && password && passwordCheck && passwordCheck === password) {
         axios
-          .post("http://localhost:7501/users/signup", {
+          .post(URL + "/users/signup", {
             email: email,
             password: password,
             admin: admin,

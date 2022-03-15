@@ -4,6 +4,7 @@ import { useSetRecoilState } from "recoil";
 import { userData, presetData } from "../../atom/atom";
 import { useNavigate } from "react-router-dom";
 import { Cookies } from "react-cookie";
+import { URL } from "../../utils/data";
 
 import {
   Header,
@@ -36,7 +37,7 @@ function Login() {
       e.preventDefault();
       if (email && password) {
         await axios
-          .post("http://localhost:7501/users/login", {
+          .post(URL + "/users/login", {
             email: email,
             password: password,
           })

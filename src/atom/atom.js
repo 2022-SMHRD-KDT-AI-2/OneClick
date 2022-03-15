@@ -29,6 +29,6 @@ export const locationData = atom({
 
 export const shopData = atom({
   key: "shopData",
-  default: [],
+  default: null,
   effects_UNSTABLE: [persistAtom],
 });

@@ -33,11 +33,13 @@ function Map() {
   }, []);
 
   const renderShopInfo = useCallback(() => {
-    for (let item of shop.data) {
-      const inst = new Shop(mapRef.current, item);
-      inst.setMarker();
-      //inst.setReview();
-      //setShops([...shops, inst]);
+    if (shop) {
+      for (let item of shop) {
+        const inst = new Shop(mapRef.current, item);
+        inst.setMarker();
+        //inst.setReview();
+        //setShops([...shops, inst]);
+      }
     }
   }, []);
 

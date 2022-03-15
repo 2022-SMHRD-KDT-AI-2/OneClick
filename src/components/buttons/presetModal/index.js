@@ -3,7 +3,7 @@ import { Button, Input, Label } from "../../../pages/login/styles";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { presetData } from "../../../atom/atom";
-import { categories } from "../../../utils/data";
+import { categories, URL } from "../../../utils/data";
 import { ModalBackground } from "../../../styles";
 import { PresetModalContainer, Select, PresetButtons } from "../styles";
 import useInputJson from "../../../utils/useInputJson";
@@ -21,7 +21,7 @@ function PresetModal({ setOpenModal }) {
       e.preventDefault();
       if (category && keyword) {
         axios
-          .post("http://localhost:7501/users/preset", {
+          .post(URL + "/users/preset", {
             keyword: keyword,
             category: category,
           })
