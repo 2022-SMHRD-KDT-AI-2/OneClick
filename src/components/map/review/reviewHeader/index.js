@@ -4,6 +4,7 @@ import {
   Circle,
   ColumnDiv,
   Header,
+  HoildayColor,
   Image,
   Label,
   RowDiv,
@@ -26,86 +27,64 @@ function ReviewHeader({ data }) {
     occupied_tables,
   } = data;
   return (
-    <Header>
-      <Image />
-      <ShopInfo>
-        <ColumnDiv>
-          <div>👨🏻‍🍳SHOP 소개👨🏻‍🍳</div>
-          <RowDiv>
-            <ColumnDiv>
-              <Label>상호</Label>
-              <Label>분류</Label>
-              <Label>주소</Label>
-              <Label>연락처</Label>
-              <Label>SNS</Label>
-              <Label>영업시간</Label>
-              <Label>브레이크타임</Label>
-              <Label
-                style={{
-                  color: "red",
-                }}
-              >
-                휴무일
-              </Label>
-              <Label>주차공간</Label>
-            </ColumnDiv>
-            <ColumnDiv>
-              {[
-                name,
-                upperBizName,
-                address,
-                tell,
-                url,
-                opTime,
-                breaktime,
-                hoilday,
-                parking,
-              ].map((item, index) => {
-                return emptyCheck(item, index);
-              })}
-            </ColumnDiv>
-          </RowDiv>
-        </ColumnDiv>
-      </ShopInfo>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "230px",
-          justifyContent: "center",
-          alignItems: "center",
-          marginLeft: "30px",
-        }}
-      >
-        <Label
-          style={{
-            height: "30px",
-            fontSize: "25px",
-            color: "blue",
-          }}
-        >
-          혼잡도
-        </Label>
-        <Circle />
+    <>
+      <Header>
+        <Image />
+        <ShopInfo>
+          <ColumnDiv>
+            <Shoptitle>👨🏻‍🍳SHOP 소개👨🏻‍🍳</Shoptitle>
+            <RowDiv>
+              <ColumnDiv>
+                <Label>상호</Label>
+                <Label>분류</Label>
+                <Label>주소</Label>
+                <Label>연락처</Label>
+                <Label>SNS</Label>
+                <Label>영업시간</Label>
+                <Label>브레이크타임</Label>
+                <HoildayColor>휴무일</HoildayColor>
+                <Label>주차공간</Label>
+              </ColumnDiv>
+              <ColumnDiv>
+                <Label>{title}</Label>
+                <Label>{category}</Label>
+                <Label>{addr}</Label>
+                <Label>{tell}</Label>
+                <Label>{sns}</Label>
+                <Label>{opTime}</Label>
+                <Label>{breaktime}</Label>
+                <HoildayColor>{hoilday}</HoildayColor>
+                <Label>{parking}</Label>
+              </ColumnDiv>
+            </RowDiv>
+          </ColumnDiv>
+        </ShopInfo>
+        <StarAll>
+          <StarLine>
+            <StarTitle>💙별점 만족도💙</StarTitle>
+            <StarContentTitle>
+              <StarContent>
+                {reviewTitle.map((item, index) => {
+                  return <List_2>{item}</List_2>;
+                })}
+              </StarContent>
+              <StarContent>
+                {reviewTitle.map((item, index) => {
+                  return <List_3>{star(reviewScore[index])}</List_3>;
+                })}
+              </StarContent>
 
-        <Label
-          style={{
-            fontSize: "25px",
-            color: "blue",
-            marginTop: "20px",
-          }}
-        >
-          좌석
-        </Label>
-        <div
-          style={{
-            fontSize: "20px",
-          }}
-        >
-          {emptyCheck(occupied_tables, 0)} / {emptyCheck(table, 0)}
-        </div>
-      </div>
-    </Header>
+              <StarContent>
+                {reviewTitle.map((item, index) => {
+                  return <List_4>{reviewScore[index]}</List_4>;
+                })}
+              </StarContent>
+            </StarContentTitle>
+          </StarLine>
+        </StarAll>
+      </Header>
+      <hr></hr>
+    </>
   );
 }
 
