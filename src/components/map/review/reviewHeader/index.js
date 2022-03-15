@@ -16,6 +16,7 @@ import {
   StarContentTitle,
   StarLine,
   StarTitle,
+  TitleImage,
 } from "../../styles";
 import { reviewTitle } from "../../../../utils/data";
 
@@ -87,6 +88,7 @@ function ReviewHeader({ data }) {
                   return <List_2>{item}</List_2>;
                 })}
               </StarContent>
+
               <StarContent>
                 {reviewTitle.map((item, index) => {
                   return <List_3>{star(reviewScore[index])}</List_3>;

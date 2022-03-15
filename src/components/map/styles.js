@@ -31,9 +31,10 @@ export const List_1 = styled.p`
   border: 1px solid #86adff;
   padding: 8px;
   margin: 8px;
-  margin-left: 3px;
+  margin-left: 5px;
   margin-bottom: 3px;
   border-radius: 5px;
+  text-align: center;
 `;
 
 export const List_2 = styled.p`
@@ -42,26 +43,27 @@ export const List_2 = styled.p`
   padding: 5px;
   margin: 5px;
   margin-bottom: 3px;
-  fontsize: 10px;
+  font-size: 15px;
   border-radius: 5px;
 `;
 
 export const List_3 = styled.p`
-  padding: 3px;
-  margin: 5px;
+  padding: 2.5px;
+  margin: 7px;
   width: 200px;
 `;
 
 export const List_4 = styled.p`
-  padding: 10.5px;
+  padding: 7px;
+  margin: 3px;
 `;
 
 export const Footer = styled.div`
-  textalign: center;
+  text-align: center;
 `;
 
 export const ContentCenter = styled.div`
-  textalign: center;
+  text-align: center;
   display: flex;
   flex-direction: column;
 `;
@@ -105,7 +107,7 @@ export const ButtonsReview = styled.button`
 `;
 
 export const Label = styled.label`
-  fontsize: 30px;
+  font-size: 16px;
   margin: 2px;
 `;
 
@@ -126,7 +128,6 @@ export const RowDiv = styled.div`
 
 export const ImageContainer = styled.div`
   display: flex;
-  flexdirection: column;
   flex-wrap: wrap;
 `;
 
@@ -148,28 +149,30 @@ export const CloseButton = styled.button`
 
 export const HoildayColor = styled.div`
   color: red;
+  font-size: 16px;
+  margin: 2px;
 `;
 
 export const Shoptitle = styled.div`
-  fontsize: 25px;
+  font-size: 20px;
 `;
 
 export const StarContent = styled.div`
-  display: flex;
-  flexdirection: column;
-  backgroundcolor: whitesmoke;
+  flex-direction: row;
+  background-color: whitesmoke;
 `;
 
 export const StarContentTitle = styled.div`
   display: flex;
-  textalign: center;
+  text-align: center;
   width: 500px;
-  flexdirection: row;
+  flex-direction: row;
 `;
 
 export const StarTitle = styled.div`
-  fontsize: 20px;
+  font-size: 20px;
   width: 350px;
+  text-align: center;
 `;
 
 export const StarLine = styled.div`
@@ -179,30 +182,30 @@ export const StarLine = styled.div`
 
 export const StarAll = styled.div`
   display: flex;
-  flexdirection: column;
-  width: 200px;
-  justifycontent: center;
-  alignitems: center;
-  marginleft: 50px;
+  width: 450px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0px;
 `;
 
 export const Menu = styled.div`
   margin: 2px;
-  fontsize: 20px;
-  textalign: center;
+  font-size: 20px;
+  text-align: center;
   width: 500px;
 `;
 
 export const ContentsAll = styled.div`
-  textalign: center;
+  text-align: center;
   width: 400px;
   display: flex;
   flex-direction: column;
 `;
 
 export const ContentsTitle = styled.div`
-  fontsize: 20px;
-  margin: 2px;
+  font-size: 20px;
+  text-align: center;
+  width: 400px;
 `;
 
 export const StarRating = styled(FlexColumnDiv)``;
