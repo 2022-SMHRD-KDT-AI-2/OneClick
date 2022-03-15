@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userData } from "../../../../atom/atom";
 import { FlexColumnDiv, FlexRowDiv } from "../../../../styles";
 import { Button, Input, Label } from "../../../../pages/login/styles";
 import styled from "@emotion/styled";
 import useInputJson from "../../../../utils/useInputJson";
 import { PresetButtons } from "../../../buttons/styles";
+import MenuModal from "../menuModal";
 
 const EditLabel = styled(Label)`
   width: 150px;
   margin-top: 0.3rem;
 `;
 
-const shopDataLabel = {
-  name: "상호명",
-  address: "주소",
-  desc: "소개",
-  tell: "연락처",
-  url: "SNS",
-};
-
-function EditShop() {
+function EditShop({ setOpenModal }) {
   const [hasData, setHasData] = useState(false);
-  const [user, setUser] = useRecoilState(userData);
+  const [image, setImage] = useState(null);
+  const [imageBase64, setImageBase64] = useState("");
+  const user = useRecoilValue(userData);
+  const [openMenu, setOpenMenu] = useState(false);
   const [ownedShopData, onChangeOwnedShopData, setOwnedShopData] = useInputJson(
     {
       name: "",
@@ -40,8 +36,7 @@ function EditShop() {
       upperBizName: "",
       middleBizName: "",
       lowerBizName: "",
-      detailBizName: "",
-      title_img_src: "",
+      title_img: "",
     }
   );
   const {
@@ -59,7 +54,7 @@ function EditShop() {
     upperBizName,
     middleBizName,
     lowerBizName,
-    title_img_src,
+    title_img,
   } = ownedShopData;
   useEffect(() => {
     if (user.shop) {
@@ -68,54 +63,45 @@ function EditShop() {
           id: user.shop,
         })
         .then((res) => {
-          const {
-            name,
-            address,
-            desc,
-            tell,
-            url,
-            tables,
-            occupied_tables,
-            parking,
-            parking_capacity,
-            opTime,
-            breakTime,
-            upperBizName,
-            middleBizName,
-            lowerBizName,
-            detailBizName,
-            title_img_src,
-          } = res.data.data;
           setHasData(true);
-          setOwnedShopData({
-            name: name,
-            address: address,
-            desc: desc,
-            tell: tell,
-            url: url,
-            tables: tables,
-            occupied_tables: occupied_tables,
-            parking: parking,
-            parking_capacity: parking_capacity,
-            opTime: opTime,
-            breakTime: breakTime,
-            upperBizName: upperBizName,
-            middleBizName: middleBizName,
-            lowerBizName: lowerBizName,
-            detailBizName: detailBizName,
-            title_img_src: title_img_src,
-          });
+          setOwnedShopData(res.data.data);
         });
     }
-  }, [user.shop]);
+  }, [user.shop, setOwnedShopData]);
+
+  const onClickEditButton = () => {
+    const formData = new FormData();
+    formData.append("img", imageBase64);
+    formData.append("data", {
+      id: user.shop,
+      data: ownedShopData,
+    });
+    axios.post("http://localhost:7501/shops/editinfo", formData).then((res) => {
+      if (res.data.success) setOpenModal(false);
+    });
+  };
+
+  const onChangeImage = (e) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      setImageBase64(reader.result);
+      setImage(e.target.files[0]);
+    };
+  };
 
   return (
     hasData && (
       <FlexColumnDiv style={{ overflow: "scroll" }}>
+        {openMenu && <MenuModal setOpenMenu={setOpenMenu} />}
         <FlexRowDiv>
           <EditLabel>대표이미지</EditLabel>
-          <img src={title_img_src} />
-          <input type="file" />
+          <img
+            src={imageBase64 ? imageBase64 : title_img}
+            alt="title"
+            style={{ width: "250px" }}
+          />
+          <input type="file" onChange={onChangeImage} />
         </FlexRowDiv>
         <FlexRowDiv>
           <EditLabel>상호명</EditLabel>
@@ -173,13 +159,7 @@ function EditShop() {
             onChange={onChangeOwnedShopData}
             style={{ width: "150px" }}
           />
-          /
-          <Input
-            value={parking}
-            name="name"
-            onChange={onChangeOwnedShopData}
-            style={{ width: "150px" }}
-          />
+          <EditLabel>{parking ? " 대 가능" : " 불가능"}</EditLabel>
         </FlexRowDiv>
         <FlexRowDiv>
           <EditLabel>테이블현황</EditLabel>
@@ -214,11 +194,15 @@ function EditShop() {
           />
         </FlexRowDiv>
         <FlexRowDiv>
-          <EditLabel>메뉴</EditLabel>
+          <FlexColumnDiv>
+            <EditLabel>메뉴</EditLabel>
+            <Button onClick={() => setOpenMenu(true)}>추가</Button>
+          </FlexColumnDiv>
+          메뉴 출력해주기
         </FlexRowDiv>
         <PresetButtons>
-          <Button>수정</Button>
-          <Button>취소</Button>
+          <Button onClick={onClickEditButton}>수정</Button>
+          <Button onClick={() => setOpenModal(false)}>취소</Button>
         </PresetButtons>
       </FlexColumnDiv>
     )

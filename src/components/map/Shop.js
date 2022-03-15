@@ -2,9 +2,12 @@ import { renderToString } from "react-dom/server";
 import AddReview from "./addReview";
 import Marker from "./marker";
 import Review from "./review";
-import { reviewTitle } from "../../utils/data";
+import { reviewTitle, URL } from "../../utils/data";
+import axios from "axios";
 
 const { Tmapv2 } = window;
+
+axios.defaults.withCredentials = true;
 
 export class Shop {
   constructor(map, data) {
@@ -104,6 +107,23 @@ export class Shop {
                   comment.push(i);
                 }
               }
+              const formData = new FormData();
+              formData.append(
+                "img",
+                document.getElementById(`${this.data.id}selectImage`).files[0]
+              );
+              formData.append("shopId", this.data.id);
+              formData.append("comment", comment.join(","));
+              formData.append("tasty", score[0]);
+              formData.append("price", score[1]);
+              formData.append("cleanliness", score[2]);
+              formData.append("acessibility", score[3]);
+              formData.append("mood", score[4]);
+              console.log(formData);
+
+              axios.post(URL + "/reviews", formData).then((res) => {
+                this.addReview.setMap(null);
+              });
             });
 
           document

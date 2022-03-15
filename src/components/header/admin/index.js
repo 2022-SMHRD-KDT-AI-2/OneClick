@@ -30,7 +30,7 @@ function Admin({ setOpenModal }) {
     <ModalBackground onClick={() => setOpenModal(false)}>
       <AdminModal onClick={(e) => e.stopPropagation()}>
         {hasShop ? (
-          <EditShop />
+          <EditShop setOpenModal={setOpenModal} />
         ) : (
           <SearchShop setOpenModal={setOpenModal} setHasShop={setHasShop} />
         )}

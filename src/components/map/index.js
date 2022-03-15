@@ -3,6 +3,8 @@ import { Shop } from "./Shop";
 import styled from "@emotion/styled";
 import { useRecoilValue } from "recoil";
 import { locationData, shopData } from "../../atom/atom";
+import { renderToString } from "react-dom/server";
+import AddReview from "./addReview";
 
 const MpaContainer = styled.div`
   width: calc(80% + 1px);
@@ -45,6 +47,16 @@ function Map() {
 
   useEffect(() => {
     initTMap();
+    const addreview = new Tmapv2.InfoWindow({
+      position: new Tmapv2.LatLng(loc.lat, loc.long),
+      background: false,
+      border: "0px solid white",
+      content: renderToString(<AddReview id={1} key={1} />),
+      type: 2,
+      align: 15,
+      visible: true,
+      map: mapRef.current,
+    });
   }, [initTMap]);
 
   useEffect(() => {
