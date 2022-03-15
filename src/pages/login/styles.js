@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { categoryColors } from "../../utils/data";
 
 export const AuthContainer = styled.div`
-  margin-top: 15%;
+  margin-top: 5%;
 `;
 
 export const Header = styled.header`
@@ -54,7 +54,7 @@ export const Input = styled.input`
   background-color: rgba(var(--sk_primary_background, 255, 255, 255), 1);
   padding: 11px 12px 13px 11px;
   height: 44px;
-  font-size: 18px;
+  font-size: 13px;
   line-height: 1.33333333;
 
   &:focus {
@@ -133,6 +133,7 @@ export const LinkContainer = styled.a`
   font-size: 1.2rem;
   color: black;
   margin: 0 auto 8px;
+  color: #1264a3;
 
   &:hover {
     text-decoration: underline;

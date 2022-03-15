@@ -69,6 +69,7 @@ function Signup() {
               name="email"
               value={email}
               onChange={onChangeFormData}
+              placeholder="test@test.com"
             ></Input>
           </div>
           {!email && <Error>Email을 입력해주세요!</Error>}
@@ -80,6 +81,7 @@ function Signup() {
               value={password}
               name="password"
               onChange={onChangeFormData}
+              placeholder="영대소문자/숫자 혼용하여 13자 이내로 입력해주세요"
             ></Input>
           </div>
         </Label>
@@ -90,6 +92,7 @@ function Signup() {
               value={passwordCheck}
               name="passwordCheck"
               onChange={onChangeFormData}
+              placeholder="입력한 Password와 똑같이 입력해주세요"
             ></Input>
           </div>
           {password !== passwordCheck && (

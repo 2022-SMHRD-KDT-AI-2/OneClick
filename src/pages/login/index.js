@@ -77,6 +77,7 @@ function Login() {
               value={email}
               onChange={onChangeFormData}
               name="email"
+              placeholder="test@test.com"
             />
           </div>
           {!email && <Error>Email을 입력해주세요!</Error>}
@@ -88,6 +89,7 @@ function Login() {
               value={password}
               name="password"
               onChange={onChangeFormData}
+              placeholder="영대소문자/숫자 혼용하여 13자 이내로 입력해주세요"
             ></Input>
           </div>
           {!password && <Error>Password를 입력해주세요!</Error>}
