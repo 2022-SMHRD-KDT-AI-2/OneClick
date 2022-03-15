@@ -42,6 +42,7 @@ function Signup() {
             admin: admin,
           })
           .then((res) => {
+            console.log(res.data);
             if (res.data.success) nav("/login");
           });
       } else {
@@ -101,7 +102,7 @@ function Signup() {
             <Check type="checkbox" onChange={onChangeCheck} />
           </div>
         </Label>
-        <Button type="submit">L O G I N</Button>
+        <Button type="submit">S I G N U P</Button>
         <FlexRowDiv>
           <LinkContainer
             onClick={() => {

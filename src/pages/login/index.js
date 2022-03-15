@@ -41,14 +41,14 @@ function Login() {
             email: email,
             password: password,
           })
-          .then(async (res) => {
+          .then((res) => {
             if (res.data.success) {
               const { admin, preset, shopId } = res.data;
-              await setUser({
+              setUser({
                 admin: admin,
                 shop: shopId,
               });
-              await setPreset(preset);
+              setPreset(preset);
               nav("/");
             }
           })

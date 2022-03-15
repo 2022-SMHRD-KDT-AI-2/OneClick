@@ -3,7 +3,6 @@ import { FlexColumnDiv, FlexRowDiv } from "../../styles";
 
 export const InfoWindowContainer = styled.div`
   width: 900px;
-  height: 800px;
   border-radius: 20px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -79,6 +78,7 @@ export const ButtonsClick = styled.button`
   font-family: ONE-Mobile-POP;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
+
   &:hover {
     background-color: #008cba;
     color: white;
@@ -137,7 +137,7 @@ export const Image = styled.img`
   border-radius: 10px;
 `;
 
-export const Closebutton = styled.button`
+export const CloseButton = styled.button`
   position: absolute;
   font-size: 1rem;
   background-color: white;

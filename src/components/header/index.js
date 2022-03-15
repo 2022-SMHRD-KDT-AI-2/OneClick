@@ -21,11 +21,13 @@ function Header() {
 
   const logout = () => {
     axios.get(URL + "/users/logout").then((res) => {
+      console.log(res.data);
       if (res.data.success) {
         setIsLoggedIn(false);
         setUserData(null);
         setPresetData([]);
         setShopData([]);
+        setIsLoggedIn(false);
       }
     });
   };

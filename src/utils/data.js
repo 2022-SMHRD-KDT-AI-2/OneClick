@@ -44,4 +44,4 @@ export const categoryColors = {
   default: "#ffffff",
 };
 
-export const URL = "http://121.147.185.4:7501";
+export const URL = "http://localhost:7501";

@@ -1,17 +1,36 @@
 import React from "react";
-import { emptyCheck } from "../../../../utils/functions";
 import {
-  Circle,
   ColumnDiv,
   Header,
   HoildayColor,
   Image,
   Label,
+  List_2,
+  List_3,
+  List_4,
   RowDiv,
   ShopInfo,
+  Shoptitle,
+  StarAll,
+  StarContent,
+  StarContentTitle,
+  StarLine,
+  StarTitle,
 } from "../../styles";
+import { reviewTitle } from "../../../../utils/data";
+
+const reviewScore = [4.1, 2.5, 3.3, 5, 1];
 
 function ReviewHeader({ data }) {
+  function star(number) {
+    const num = Math.round(number);
+    let result = "";
+    for (let i = 1; i <= num; i++) {
+      result += "⭐";
+    }
+    return result;
+  }
+
   const {
     id,
     name,
@@ -46,11 +65,11 @@ function ReviewHeader({ data }) {
                 <Label>주차공간</Label>
               </ColumnDiv>
               <ColumnDiv>
-                <Label>{title}</Label>
-                <Label>{category}</Label>
-                <Label>{addr}</Label>
+                <Label>{name}</Label>
+                <Label>{upperBizName}</Label>
+                <Label>{address}</Label>
                 <Label>{tell}</Label>
-                <Label>{sns}</Label>
+                <Label>{url}</Label>
                 <Label>{opTime}</Label>
                 <Label>{breaktime}</Label>
                 <HoildayColor>{hoilday}</HoildayColor>
