@@ -18,10 +18,11 @@ import {
   StarTitle,
 } from "../../styles";
 import { reviewTitle } from "../../../../utils/data";
+import { emptyCheck } from "../../../../utils/functions";
 
 const reviewScore = [4.1, 2.5, 3.3, 5, 1];
 
-function ReviewHeader({ data }) {
+function ReviewHeader({ data, score }) {
   function star(number) {
     const num = Math.round(number);
     let result = "";
@@ -44,11 +45,13 @@ function ReviewHeader({ data }) {
     parking,
     table,
     occupied_tables,
+    title_img,
   } = data;
+
   return (
     <Header>
       {id && table && occupied_tables}
-      <Image />
+      <Image src={`http://localhost:7501${title_img}`} />
       <ShopInfo>
         <ColumnDiv>
           <Shoptitle>👨🏻‍🍳SHOP 소개👨🏻‍🍳</Shoptitle>
@@ -65,15 +68,17 @@ function ReviewHeader({ data }) {
               <Label>주차공간</Label>
             </ColumnDiv>
             <ColumnDiv>
-              <Label>{name}</Label>
-              <Label>{upperBizName}</Label>
-              <Label>{address}</Label>
-              <Label>{tell}</Label>
-              <Label>{url}</Label>
-              <Label>{opTime}</Label>
-              <Label>{breaktime}</Label>
-              <HoildayColor>{hoilday}</HoildayColor>
-              <Label>{parking}</Label>
+              {[
+                name,
+                upperBizName,
+                address,
+                tell,
+                url,
+                opTime,
+                breaktime,
+                hoilday,
+                parking,
+              ].map((item, index) => emptyCheck(item, index))}
             </ColumnDiv>
           </RowDiv>
         </ColumnDiv>
@@ -89,14 +94,14 @@ function ReviewHeader({ data }) {
             </StarContent>
 
             <StarContent>
-              {reviewTitle.map((item, index) => {
-                return <List3>{star(reviewScore[index])}</List3>;
+              {score.map((item, index) => {
+                return <List3 key={index}>{star(item)}</List3>;
               })}
             </StarContent>
 
             <StarContent>
-              {reviewTitle.map((item, index) => {
-                return <List4>{reviewScore[index]}</List4>;
+              {score.map((item, index) => {
+                return <List4 key={index}>{item}</List4>;
               })}
             </StarContent>
           </StarContentTitle>

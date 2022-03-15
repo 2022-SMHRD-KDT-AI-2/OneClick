@@ -10,16 +10,10 @@ function Admin({ setOpenModal }) {
   const user = useRecoilValue(userData);
   const [hasShop, setHasShop] = useState(false);
 
-  useEffect(() => {
-    if (user.shop) {
-      setHasShop(true);
-    }
-  }, [user]);
-
   return (
     <ModalBackground onClick={() => setOpenModal(false)}>
       <AdminModal onClick={(e) => e.stopPropagation()}>
-        {hasShop ? (
+        {user.shop ? (
           <EditShop setOpenModal={setOpenModal} />
         ) : (
           <SearchShop setOpenModal={setOpenModal} setHasShop={setHasShop} />

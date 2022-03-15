@@ -1,22 +1,44 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button } from "../styles";
 import axios from "axios";
-import { useSetRecoilState } from "recoil";
-import { shopData } from "../../../atom/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { locationData, shopData } from "../../../atom/atom";
 import { URL } from "../../../utils/data";
+import { Shop } from "../../Map/Shop";
+import { createMap, destroyMap } from "../../../utils/functions";
+
+const { Map, LatLng } = window.Tmapv2;
 
 function SearchButton({ keyword, category }) {
+  const mapRef = useRef(null);
   const setShop = useSetRecoilState(shopData);
+  const loc = useRecoilValue(locationData);
   const onClickSearchButton = () => {
     axios
       .post(URL + "/shops/search", {
-        lat: 35.10928780737578,
-        long: 126.87626628837687,
+        lat: loc.lat,
+        long: loc.long,
         keyword: keyword,
         category: category,
       })
       .then((res) => {
-        setShop(res.data.data);
+        setShop(res.data.shopData);
+        destroyMap();
+        mapRef.current = new Map("TMap", {
+          // 지도의 폭
+          width: "80%",
+          // 지도의 높이
+          height: "100%",
+          // 지도의 범위
+          zoom: 16,
+          zIndexMarker: 5,
+          zIndexInfoWindow: 10,
+        });
+        mapRef.current.setCenter(new LatLng(loc.lat, loc.long));
+        res.data.shopData.map((item) => {
+          const shop = new Shop(mapRef.current, item);
+          shop.setMarker();
+        });
       });
   };
   return <Button onClick={onClickSearchButton}>{keyword}</Button>;

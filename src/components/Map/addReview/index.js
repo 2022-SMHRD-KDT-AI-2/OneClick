@@ -1,6 +1,6 @@
 import React from "react";
 import "./modal.css";
-import { comment, reviewTitle } from "../../../utils/data";
+import { reviewComment, reviewTitle } from "../../../utils/data";
 import styled from "@emotion/styled";
 
 const Image = styled.img`
@@ -79,7 +79,7 @@ function AddReview({ id }) {
         </div>
         <div className="reviewList" style={{ textAlign: "center" }}>
           <h3 style={{ margin: 7, fontSize: 20 }}>한줄평</h3>
-          {comment.map((item, key) => {
+          {reviewComment.map((item, key) => {
             return (
               <div
                 id={`${id}addReview_comment${key}`}
@@ -89,7 +89,7 @@ function AddReview({ id }) {
                 className="box"
                 style={{ margin: 6 }}
               >
-                {item}
+                {item.title}
               </div>
             );
           })}

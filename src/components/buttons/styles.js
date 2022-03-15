@@ -5,7 +5,7 @@ import { categoryColors } from "../../utils/data";
 export const ButtonsContainer = styled.div`
   min-width: 900px;
   width: 80%;
-  border-right: 1px solid gray;
+  
   display: flex;
   flex: 0 0 auto;
   align-items: center;
@@ -17,7 +17,7 @@ export const PresetModalContainer = styled(ModalContainer)`
   border-radius: 1rem;
   width: 50%;
   min-width: 500px;
-  
+
   flex-direction: column;
   padding: 1rem;
 `;

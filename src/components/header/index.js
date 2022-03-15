@@ -4,7 +4,7 @@ import { Cookies } from "react-cookie";
 import Admin from "./admin";
 import { Logo, Link, HeaderContainer } from "./styles";
 import axios from "axios";
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilState } from "recoil";
 import { presetData, shopData, userData } from "../../atom/atom";
 import { URL } from "../../utils/data";
 
@@ -15,7 +15,7 @@ function Header() {
   const cookies = useMemo(() => new Cookies(), []);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const setUserData = useSetRecoilState(userData);
+  const [user, setUser] = useRecoilState(userData);
   const setPresetData = useSetRecoilState(presetData);
   const setShopData = useSetRecoilState(shopData);
 
@@ -24,7 +24,7 @@ function Header() {
       console.log(res.data);
       if (res.data.success) {
         setIsLoggedIn(false);
-        setUserData(null);
+        setUser(null);
         setPresetData([]);
         setShopData([]);
         setIsLoggedIn(false);
@@ -43,7 +43,7 @@ function Header() {
       <Logo>OneClick</Logo>
       {isLoggedIn ? (
         <div>
-          <Link onClick={() => setOpenModal(true)}>ADMIN</Link>
+          {user.admin && <Link onClick={() => setOpenModal(true)}>ADMIN</Link>}
           <Link onClick={logout}>LOGOUT</Link>
         </div>
       ) : (

@@ -23,8 +23,6 @@ export const Header = styled.div`
   }
 `;
 
-export const Contents = styled.div``;
-
 export const List1 = styled.p`
   width: 350px;
   background-color: #c9daff;

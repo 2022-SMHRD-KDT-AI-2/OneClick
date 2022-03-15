@@ -39,6 +39,7 @@ function SearchShop({ setOpenModal, setHasShop }) {
   const [searchedData, setSearchedData] = useState([]);
   const loc = useRecoilValue(locationData);
   const setUser = useSetRecoilState(userData);
+
   const onClickSearchButton = useCallback(() => {
     if (keyword) {
       axios
@@ -49,13 +50,14 @@ function SearchShop({ setOpenModal, setHasShop }) {
           long: loc.long,
         })
         .then((res) => {
-          setSearchedData(res.data.data.poi);
+          setSearchedData(res.data.data);
           setKeyword("");
         });
     } else {
       alert("검색어를 입력해주세요!");
     }
   }, [keyword, page, loc.lat, loc.long, setKeyword]);
+
   const onClickPageButton = async (e) => {
     const result = parseInt(e.target.value) + page;
     if (result >= 1) {
@@ -63,6 +65,7 @@ function SearchShop({ setOpenModal, setHasShop }) {
       onClickSearchButton();
     }
   };
+
   const onClickTableItem = (e) => {
     const target = e.target.getAttribute("value");
     axios
@@ -127,26 +130,3 @@ function SearchShop({ setOpenModal, setHasShop }) {
 
 // ◀ ▶
 export default SearchShop;
-
-/*data.map((item, index) => {
-  const {
-    name,
-    id,
-    upperAddrName,
-    middleAddrName,
-    roadName,
-    firstBuildNo,
-    secondBuildNo,
-  } = item;
-  return (
-      <TableRow value={id} onClick={onClickShop} key={index}>
-        <div className="name" value={id}>
-          {name}
-        </div>
-        <div
-            value={id}
-            className="addr"
-        ></div>
-      </TableRow>
-  );
-})*/

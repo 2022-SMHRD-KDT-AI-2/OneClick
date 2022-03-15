@@ -15,6 +15,12 @@ export class Shop {
     this.data = data;
   }
 
+  removeAll = () => {
+    this.marker.setMap(null);
+    if (this.review) this.review.setMap(null);
+    if (this.addReview) this.addReview.setMap(null);
+  };
+
   //마커 생성
   setMarker = () => {
     this.marker = new Tmapv2.Marker({
@@ -23,19 +29,34 @@ export class Shop {
       map: this.map,
     });
 
-    this.marker.addListener("click", () => {
+    this.marker.addListener("click", async () => {
       // 마커 클릭시 리뷰 인포윈도우 생성 후 보이도록 함
+      await axios
+        .get("http://localhost:7501/reviews/" + this.data.id)
+        .then((res) => {
+          this.shopReview = res.data.review;
+          this.reviewImage = res.data.reviewImage;
+          this.menu = res.data.menu;
+        });
+
       this.review = new Tmapv2.InfoWindow({
         position: new Tmapv2.LatLng(this.data.lat, this.data.long),
         background: false,
         border: "0px solid white",
         content: renderToString(
-          <Review data={this.data} key={this.data.id + "review"} />
+          <Review
+            data={this.data}
+            review={this.shopReview}
+            reviewImgae={this.reviewImage}
+            key={this.data.id + "review"}
+            menu={this.menu}
+          />
         ),
         type: 2,
         align: 15,
         visible: true,
       });
+
       this.review.setMap(this.map);
       this.map.setCenter(new Tmapv2.LatLng(this.data.lat, this.data.long));
 

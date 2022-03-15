@@ -7,7 +7,7 @@ import {
 } from "../../../../styles";
 import { Button, Input, Label } from "../../../../pages/login/styles";
 import styled from "@emotion/styled";
-import { Image } from "../../../map/styles";
+import { Image } from "../../../Map/styles";
 import useSelectImage from "../../../../utils/useSelectImage";
 import { PresetButtons } from "../../../buttons/styles";
 import axios from "axios";
@@ -21,7 +21,7 @@ const MenuModalContainer = styled(ModalContainer)`
   flex-direction: column;
 `;
 
-function MenuModal({ setOpenMenu }) {
+function MenuModal({ setOpenMenu, fetchData }) {
   const [base64, image, onChangeImage] = useSelectImage();
   const user = useRecoilValue(userData);
   const [data, onChangeData] = useInputJson({
@@ -38,7 +38,10 @@ function MenuModal({ setOpenMenu }) {
     formData.append("price", price);
     console.log(formData);
     axios.post("http://localhost:7501/shops/addmenu", formData).then((res) => {
-      if (res.data.success) setOpenMenu(false);
+      if (res.data.success) {
+        setOpenMenu(false);
+        fetchData();
+      }
     });
   };
 

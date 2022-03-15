@@ -16,20 +16,12 @@ const ListContainer = styled.div`
 
 function List() {
   const shop = useRecoilValue(shopData);
-  const [exist, setExist] = useState(false);
-  useEffect(() => {
-    if (shop.data) {
-      setExist(true);
-    } else {
-      setExist(false);
-    }
-  }, [shop.data]);
 
   return (
     <ListContainer>
-      {exist &&
-        Object.values(shop.data).map((item, index) => {
-          return <ListItem data={item} key={index} />;
+      {shop &&
+        shop.map((item, index) => {
+          return <ListItem data={item} key={item.id} />;
         })}
     </ListContainer>
   );
