@@ -22,23 +22,28 @@ export class Shop {
       iconHTML: renderToString(<Marker data={this.data} key={this.data.id} />),
       map: this.map,
     });
+
     this.marker.addListener("click", () => {
       // 마커 클릭시 리뷰 인포윈도우 생성 후 보이도록 함
       this.review = new Tmapv2.InfoWindow({
         position: new Tmapv2.LatLng(this.data.lat, this.data.long),
         background: false,
         border: "0px solid white",
-        content: renderToString(<Review data={this.data} key={this.data.id} />),
+        content: renderToString(
+          <Review data={this.data} key={this.data.id + "review"} />
+        ),
         type: 2,
         align: 15,
         visible: true,
       });
       this.review.setMap(this.map);
+      this.map.setCenter(new Tmapv2.LatLng(this.data.lat, this.data.long));
 
-      // 닫기 버튼 클릭시 리뷰 윈포윈도우 닫기
-      document.getElementById(this.data.id).addEventListener("click", () => {
-        this.review.setMap(null);
-      });
+      document
+        .getElementById(this.data.id + "reviewCloseButton")
+        .addEventListener("click", () => {
+          this.review.setMap(null);
+        });
 
       // 리뷰작성버튼 클릭 시 리뷰작성 인포윈도우 생성 및 출력
       document
@@ -49,29 +54,15 @@ export class Shop {
             background: false,
             border: "0px solid white",
             content: renderToString(
-              <AddReview id={this.data.id} key={this.data.id} />
+              <AddReview id={this.data.id} key={this.data.id + "marker"} />
             ),
             type: 2,
             align: 15,
             visible: true,
           });
-
           this.review.setMap(null);
           this.addReview.setMap(this.map);
 
-          // 이미지선택버튼 클릭 시
-          document
-            .getElementById(this.data.id + "selectImage")
-            .addEventListener("change", (e) => {
-              const reader = new FileReader();
-              reader.readAsDataURL(e.target.files[0]);
-              reader.onload = () => {
-                let img = document.getElementById(this.data.id + "image");
-                img.src = reader.result;
-              };
-            });
-
-          // 한줄평
           for (let i = 0; i < 10; i += 1) {
             let comment = document.getElementById(
               this.data.id + "addReview_comment" + i
@@ -88,6 +79,25 @@ export class Shop {
               }
             });
           }
+
+          // 이미지선택버튼 클릭 시
+          document
+            .getElementById(this.data.id + "selectImage")
+            .addEventListener("change", (e) => {
+              const reader = new FileReader();
+              reader.readAsDataURL(e.target.files[0]);
+              reader.onload = () => {
+                let img = document.getElementById(this.data.id + "image");
+                img.src = reader.result;
+              };
+            });
+
+          document
+            .getElementById(this.data.id + "closeAddReview")
+            .addEventListener("click", () => {
+              this.review.setMap(this.map);
+              this.addReview.setMap(null);
+            });
 
           // 리뷰 제출버튼
           document
@@ -125,16 +135,7 @@ export class Shop {
                 this.addReview.setMap(null);
               });
             });
-
-          document
-            .getElementById(this.data.id + "closeAddReview")
-            .addEventListener("click", () => {
-              this.review.setMap(this.map);
-              this.addReview.setMap(null);
-            });
         });
     });
   };
-
-  setAddReview = () => {};
 }

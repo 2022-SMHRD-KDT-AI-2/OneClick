@@ -16,7 +16,7 @@ const EditLabel = styled(Label)`
 
 function EditShop({ setOpenModal }) {
   const [hasData, setHasData] = useState(false);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
   const [imageBase64, setImageBase64] = useState("");
   const user = useRecoilValue(userData);
   const [openMenu, setOpenMenu] = useState(false);
@@ -71,7 +71,7 @@ function EditShop({ setOpenModal }) {
 
   const onClickEditButton = () => {
     const formData = new FormData();
-    formData.append("img", imageBase64);
+    formData.append("img", image);
     formData.append("data", {
       id: user.shop,
       data: ownedShopData,

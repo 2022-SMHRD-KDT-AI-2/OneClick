@@ -6,17 +6,10 @@ import {
   ContentsTitle,
   Image,
   ImageContainer,
-  List_1,
+  List1,
   Menu,
-  RowDiv,
 } from "../../styles";
-import styled from "@emotion/styled";
 import { FlexRowDiv } from "../../../../styles";
-
-const StarRate = styled.div`
-  width: 120px;
-  margin: 0.5rem 0 0.5rem 1rem;
-`;
 
 function ReviewContents() {
   return (
@@ -24,7 +17,7 @@ function ReviewContents() {
       <ContentsAll>
         <ContentsTitle>💙한줄평 리뷰💙</ContentsTitle>
         {comment.map((item, key) => {
-          return <List_1 key={key}>{item}</List_1>;
+          return <List1 key={key}>{item}</List1>;
         })}
       </ContentsAll>
       <ContentCenter>

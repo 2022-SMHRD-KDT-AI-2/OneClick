@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { FlexColumnDiv, FlexRowDiv } from "../../styles";
+import { FlexColumnDiv } from "../../styles";
 
 export const InfoWindowContainer = styled.div`
   width: 900px;
@@ -25,7 +25,7 @@ export const Header = styled.div`
 
 export const Contents = styled.div``;
 
-export const List_1 = styled.p`
+export const List1 = styled.p`
   width: 350px;
   background-color: #c9daff;
   border: 1px solid #86adff;
@@ -37,7 +37,7 @@ export const List_1 = styled.p`
   text-align: center;
 `;
 
-export const List_2 = styled.p`
+export const List2 = styled.p`
   background-color: whitesmoke;
   border: 1px solid black;
   padding: 5px;
@@ -47,13 +47,13 @@ export const List_2 = styled.p`
   border-radius: 5px;
 `;
 
-export const List_3 = styled.p`
+export const List3 = styled.p`
   padding: 2.5px;
   margin: 7px;
   width: 200px;
 `;
 
-export const List_4 = styled.p`
+export const List4 = styled.p`
   padding: 7px;
   margin: 3px;
 `;

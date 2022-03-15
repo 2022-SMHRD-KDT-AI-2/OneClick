@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 
 function useSelectImage() {
   const [base64, setBase64] = useState("" | ArrayBuffer);

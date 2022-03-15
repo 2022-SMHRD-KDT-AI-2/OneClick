@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { userData, location, shopData } from "../../../atom/atom";
+import { userData } from "../../../atom/atom";
 import { useRecoilValue } from "recoil";
-import { FlexRowDiv, ModalBackground } from "../../../styles";
+import { ModalBackground } from "../../../styles";
 import { AdminModal } from "../styles";
-import axios from "axios";
-import useInput from "../../../utils/useInput";
-import {
-  Button,
-  Input,
-  NormalButton,
-  Label,
-} from "../../../pages/login/styles";
-import { PresetButtons } from "../../buttons/styles";
-import styled from "@emotion/styled";
 import SearchShop from "./searchShop";
 import EditShop from "./editShop";
 
@@ -40,8 +30,3 @@ function Admin({ setOpenModal }) {
 }
 
 export default Admin;
-
-/*<div>
-  <ModalButton>수정</ModalButton>
-  <ModalButton onClick={() => setOpenModal(false)}>취소</ModalButton>
-</div>*/

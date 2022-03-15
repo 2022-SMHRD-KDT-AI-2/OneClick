@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+
 import { Shop } from "./Shop";
 import styled from "@emotion/styled";
 import { useRecoilValue } from "recoil";
 import { locationData, shopData } from "../../atom/atom";
-import { renderToString } from "react-dom/server";
-import AddReview from "./addReview";
 
 const MpaContainer = styled.div`
   width: calc(80% + 1px);
+  width: 80%;
   height: 100%;
 `;
 
@@ -29,38 +29,26 @@ function Map() {
       zoom: 16,
       zIndexMarker: 5,
       zIndexInfoWindow: 10,
-      scrollwheel: false,
     });
     mapRef.current.setCenter(new Tmapv2.LatLng(loc.lat, loc.long));
-  }, []);
+  }, [Tmapv2, loc.lat, loc.long]);
 
   const renderShopInfo = useCallback(() => {
     if (shop) {
       for (let item of shop) {
         const inst = new Shop(mapRef.current, item);
         inst.setMarker();
-        //inst.setReview();
-        //setShops([...shops, inst]);
+        setShops([...shops, inst]);
       }
     }
-  }, []);
+  }, [shop]);
 
   useEffect(() => {
     initTMap();
-    const addreview = new Tmapv2.InfoWindow({
-      position: new Tmapv2.LatLng(loc.lat, loc.long),
-      background: false,
-      border: "0px solid white",
-      content: renderToString(<AddReview id={1} key={1} />),
-      type: 2,
-      align: 15,
-      visible: true,
-      map: mapRef.current,
-    });
   }, [initTMap]);
 
   useEffect(() => {
-    if (shop.length != []) renderShopInfo();
+    if (shop) renderShopInfo();
   }, [shop, renderShopInfo]);
 
   return <MpaContainer id="TMap" />;

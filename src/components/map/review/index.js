@@ -7,10 +7,9 @@ import ReviewContents from "./reviewContents";
 
 function Review({ data }) {
   const { id } = data;
-
   return (
     <InfoWindowContainer>
-      <CloseButton id={id}>❌</CloseButton>
+      <CloseButton id={`${id}reviewCloseButton`}>❌</CloseButton>
       <ReviewHeader data={data} />
       <ReviewContents data={data} />
       <ReviewFooter idx={id} />

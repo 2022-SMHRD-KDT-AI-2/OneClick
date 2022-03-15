@@ -1,33 +1,17 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import { presetData, shopData } from "../../atom/atom";
+import { useRecoilValue } from "recoil";
+import { presetData } from "../../atom/atom";
 import PresetModal from "./presetModal";
 import { ButtonsContainer, Button } from "./styles";
-import axios from "axios";
 import { defaultPreset } from "../../utils/data";
 import { Cookies } from "react-cookie";
 import SearchButton from "./searchButton";
-import { URL } from "../../utils/data";
 
 function Buttons() {
   const [openModal, setOpenModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const setShop = useSetRecoilState(shopData);
   const preset = useRecoilValue(presetData);
   const cookies = useMemo(() => new Cookies(), []);
-
-  const onClickSearch = () => {
-    // 키워드에 맞게 검색하기
-    axios
-      .post(URL + "/shops/search", {
-        lat: 35.10928780737578,
-        long: 126.87626628837687,
-      })
-      .then((res) => {
-        console.log(res.data);
-        setShop(res.data);
-      });
-  };
 
   useEffect(() => {
     if (cookies.get("token")) setIsLoggedIn(true);
