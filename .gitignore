@@ -22,3 +22,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/_wildcard.example.com.pem
+/_wildcard.example.com-key.pem
+/localhost.pem
+/localhost-key.pem

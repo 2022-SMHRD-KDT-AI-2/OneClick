@@ -16,6 +16,7 @@ import {
 import { FlexRowDiv } from "../../styles";
 import useInputJson from "../../utils/useInputJson";
 import { URL } from "../../utils/data";
+import { axiosInstance } from "../../utils/axiosInstance";
 
 function Signup() {
   const [formData, onChangeFormData] = useInputJson({
@@ -36,14 +37,14 @@ function Signup() {
       e.preventDefault();
       if (email && password && passwordCheck && passwordCheck === password) {
         axios
-          .post(URL + "/users/signup", {
+          .post("http://localhost:7501/users/signup", {
             email: email,
             password: password,
             admin: admin,
           })
           .then((res) => {
             console.log(res.data);
-            if (res.data.success) nav("/login");
+            //if (res.data.success) nav("/login");
           });
       } else {
         alert("모든 정보를 입력하여 주세요!");
