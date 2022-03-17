@@ -2,7 +2,7 @@ import { renderToString } from "react-dom/server";
 import AddReview from "./addReview";
 import Marker from "./marker";
 import Review from "./review";
-import { reviewTitle, URL } from "../../utils/data";
+import { categoryColors, reviewTitle, URL } from "../../utils/data";
 import axios from "axios";
 
 const { Tmapv2 } = window;
@@ -91,11 +91,10 @@ export class Shop {
             comment.addEventListener("click", (e) => {
               e.target.value = !e.target.value;
               if (e.target.value) {
-                comment.style.border = "1px solid #007cb9";
-                comment.style.backgroundColor = "007cb9";
-                comment.style.borderRadius = "20px";
+                comment.style.backgroundColor = categoryColors.button;
+                comment.style.color = "white";
               } else {
-                comment.style.border = "1px solid white";
+                comment.style.backgroundColor = "white";
                 comment.style.color = "black";
               }
             });

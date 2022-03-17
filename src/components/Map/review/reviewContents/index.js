@@ -6,11 +6,11 @@ import {
   ContentsTitle,
   Image,
   ImageContainer,
-  Label,
   List1,
   Menu,
 } from "../../styles";
 import { FlexColumnDiv, FlexRowDiv } from "../../../../styles";
+import styled from "@emotion/styled";
 
 function ReviewContents({ comment, menu }) {
   const review = reviewComment.slice();
@@ -21,7 +21,20 @@ function ReviewContents({ comment, menu }) {
       <ContentsAll>
         <ContentsTitle>💙한줄평 리뷰💙</ContentsTitle>
         {review.map((item, key) => {
-          return <List1 key={key}>{item.title + `  ${item.value}`}</List1>;
+          return (
+            <List1 key={key}>
+              <span>{item.title}</span>
+              <span
+                style={{
+                  position: "absolute",
+                  right: "2rem",
+                  marginTop: "8px",
+                }}
+              >
+                {item.value}
+              </span>
+            </List1>
+          );
         })}
       </ContentsAll>
       <ContentCenter>

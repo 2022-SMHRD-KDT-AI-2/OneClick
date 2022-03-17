@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { presetData } from "../../atom/atom";
 import PresetModal from "./presetModal";
 import { ButtonsContainer, Button } from "./styles";
-import { defaultPreset } from "../../utils/data";
+import { categoryColors, defaultPreset } from "../../utils/data";
 import { Cookies } from "react-cookie";
 import SearchButton from "./searchButton";
 
@@ -39,7 +39,18 @@ function Buttons() {
             />
           );
         })}
-      {isLoggedIn && <Button onClick={() => setOpenModal(true)}>+</Button>}
+      {isLoggedIn && (
+        <Button
+          onClick={() => setOpenModal(true)}
+          style={{
+            backgroundColor: "white",
+            color: "black",
+            border: `3px solid ${categoryColors["button"]}`,
+          }}
+        >
+          +
+        </Button>
+      )}
       {openModal && <PresetModal setOpenModal={setOpenModal} />}
     </ButtonsContainer>
   );

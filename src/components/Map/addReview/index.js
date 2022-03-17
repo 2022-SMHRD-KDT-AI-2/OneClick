@@ -2,6 +2,9 @@ import React from "react";
 import "./modal.css";
 import { reviewComment, reviewTitle } from "../../../utils/data";
 import styled from "@emotion/styled";
+import { FlexColumnDiv, FlexRowDiv } from "../../../styles";
+import { ButtonsClick } from "../styles";
+import { Label } from "../../../pages/login/styles";
 
 const Image = styled.img`
   width: 150px;
@@ -9,97 +12,108 @@ const Image = styled.img`
   margin: 10px;
 `;
 
+const AddReviewModalContainer = styled.div`
+  width: 900px;
+  height: 600px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: row;
+  padding: 25px;
+
+  * {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+`;
+
+const ImageContainer = styled(FlexColumnDiv)`
+  justify-content: center;
+  flex-grow: 1.8;
+`;
+
+const ScoreContainer = styled(FlexColumnDiv)`
+  justify-content: center;
+  flex-grow: 2;
+
+  > div > div {
+    width: 100px;
+  }
+`;
+
+const CommentContainer = styled(FlexColumnDiv)`
+  width: 35%;
+
+  > * {
+    flex-grow: 1;
+  }
+
+  > div {
+    border: 1px solid white;
+    border-radius: 20px;
+    margin: 5px;
+  }
+`;
+
+const ButtonContainer = styled(FlexRowDiv)`
+  flex-grow: 1;
+  justify-content: center;
+
+  > button {
+    width: 30%;
+  }
+`;
+
 function AddReview({ id }) {
   return (
-    <div className="modalContainer">
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        <div
-          className="firstbox"
-          style={{
-            width: "60%",
-            textAlign: "center",
-          }}
-        >
-          <p className="title">
-            <h3 style={{ margin: 7, fontSize: 20 }}>평가</h3>
-            {reviewTitle.map((item, key) => {
-              return (
-                <div
-                  key={key}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div>
-                    <p
-                      style={{
-                        width: "50px",
-                        margin: 4,
-                        textAlign: "center",
-                      }}
-                    >
-                      {item}
-                    </p>
-                  </div>
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <div>
-                      <input
-                        id={id + reviewTitle[key]}
-                        defaultValue={0}
-                        style={{ width: "30px" }}
-                      />
-                      / 5
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </p>
-          <p className="body">
-            <h3 style={{ margin: 6, fontSize: 20 }}>사진리뷰</h3>
-            <input id={`${id}selectImage`} type="file" accept="image/*" />
+    <AddReviewModalContainer>
+      <CommentContainer>
+        <h3>한줄평</h3>
+        {reviewComment.map((item, key) => {
+          return (
             <div
-              className="img"
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-              }}
+              id={`${id}addReview_comment${key}`}
+              name={key}
+              key={key}
+              value={false}
+              className="box"
+              style={{ margin: 6 }}
             >
-              <Image id={`${id}image`}></Image>
+              {item.title}
             </div>
-          </p>
-        </div>
-        <div className="reviewList" style={{ textAlign: "center" }}>
-          <h3 style={{ margin: 7, fontSize: 20 }}>한줄평</h3>
-          {reviewComment.map((item, key) => {
+          );
+        })}
+      </CommentContainer>
+      <FlexColumnDiv>
+        <ScoreContainer>
+          <Label>평가</Label>
+          {reviewTitle.map((item, key) => {
             return (
-              <div
-                id={`${id}addReview_comment${key}`}
-                name={key}
-                key={key}
-                value={false}
-                className="box"
-                style={{ margin: 6 }}
-              >
-                {item.title}
-              </div>
+              <FlexRowDiv key={key} style={{ justifyContent: "center" }}>
+                <div>{item}</div>
+                <input
+                  id={id + reviewTitle[key]}
+                  defaultValue={0}
+                  style={{ width: "150px" }}
+                />
+                <div>/</div>
+                <div>5</div>
+              </FlexRowDiv>
             );
           })}
-        </div>
-      </div>
-      <div className="footer">
-        <button id={`${id}submitReview`}>등록</button>
-        <button id={`${id}closeAddReview`}>취소</button>
-      </div>
-    </div>
+        </ScoreContainer>
+        <ImageContainer>
+          <Label>사진리뷰</Label>
+          <input id={`${id}selectImage`} type="file" accept="image/*" />
+          <Image id={`${id}image`} />
+        </ImageContainer>
+        <ButtonContainer>
+          <ButtonsClick id={`${id}submitReview`}>등록</ButtonsClick>
+          <ButtonsClick id={`${id}closeAddReview`}>취소</ButtonsClick>
+        </ButtonContainer>
+      </FlexColumnDiv>
+    </AddReviewModalContainer>
   );
 }
 

@@ -4,9 +4,10 @@ import { Cookies } from "react-cookie";
 import Admin from "./admin";
 import { Logo, Link, HeaderContainer } from "./styles";
 import axios from "axios";
-import { useSetRecoilState, useRecoilState } from "recoil";
-import { presetData, shopData, userData } from "../../atom/atom";
+import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
+import { locationData, presetData, shopData, userData } from "../../atom/atom";
 import { URL } from "../../utils/data";
+import { createMap, destroyMap } from "../../utils/functions";
 
 axios.defaults.withCredentials = true;
 
@@ -18,16 +19,18 @@ function Header() {
   const [user, setUser] = useRecoilState(userData);
   const setPresetData = useSetRecoilState(presetData);
   const setShopData = useSetRecoilState(shopData);
+  const loc = useRecoilValue(locationData);
 
   const logout = () => {
     axios.get(URL + "/users/logout").then((res) => {
-      console.log(res.data);
       if (res.data.success) {
         setIsLoggedIn(false);
         setUser(null);
         setPresetData([]);
         setShopData([]);
         setIsLoggedIn(false);
+        destroyMap();
+        createMap(loc.lat, loc.long);
       }
     });
   };

@@ -28,11 +28,10 @@ export const List1 = styled.p`
   background-color: #c9daff;
   border: 1px solid #86adff;
   padding: 8px;
-  margin: 8px;
-  margin-left: 5px;
-  margin-bottom: 3px;
+  margin: 8px 0 3px 5px;
   border-radius: 5px;
   text-align: center;
+  position: relative;
 `;
 
 export const List2 = styled.p`
@@ -49,6 +48,7 @@ export const List3 = styled.p`
   padding: 2.5px;
   margin: 7px;
   width: 200px;
+  font-size: 13.25px;
 `;
 
 export const List4 = styled.p`
@@ -169,7 +169,7 @@ export const StarContentTitle = styled.div`
 
 export const StarTitle = styled.div`
   font-size: 20px;
-  width: 350px;
+  width: 300px;
   text-align: center;
 `;
 
@@ -180,7 +180,7 @@ export const StarLine = styled.div`
 
 export const StarAll = styled.div`
   display: flex;
-  width: 450px;
+
   justify-content: center;
   align-items: center;
   margin-left: 0px;

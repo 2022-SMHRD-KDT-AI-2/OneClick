@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { categoryColors, categoryColorsKorean } from "../../../utils/data";
 
 const MarkerContainer = styled.div`
   background-color: white;
@@ -7,27 +8,33 @@ const MarkerContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: 90px;
-  height: 35px;
-  padding: 0 10px;
+  //height: 35px;
   align-items: center;
-  border: 2px solid #2b6bf3;
+  justify-content: center;
+  padding: 0.1rem;
+  border: 4px solid #2b6bf3;
 `;
 
 const MarkerInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 5px;
-  height: 100%;
-  font-size: 16px;
+  font-size: 1rem;
+  text-align: center;
 `;
 
 function Marker({ data }) {
-  const { name, upperBizName } = data;
+  const { name, upperBizName, id } = data;
   return (
-    <MarkerContainer>
+    <MarkerContainer
+      id={`${id}marker`}
+      style={{
+        borderColor: `${
+          upperBizName
+            ? categoryColorsKorean[upperBizName]
+            : categoryColors["button"]
+        }`,
+      }}
+    >
       <MarkerInfo>
         <span>{name}</span>
-        <span>{upperBizName}</span>
       </MarkerInfo>
     </MarkerContainer>
   );

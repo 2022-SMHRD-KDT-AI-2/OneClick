@@ -11,10 +11,6 @@ export function emptyCheck(str, index) {
   );
 }
 
-export function coord(loc, long) {
-  return new Tmapv2.LatLng(loc, long);
-}
-
 export function createMap(lat, long) {
   return new Tmapv2.Map("TMap", {
     // 지도의 폭

@@ -65,9 +65,8 @@ function EditShop({ setOpenModal }) {
     opTime,
     breakTime,
     upperBizName,
-    middleBizName,
-    lowerBizName,
     title_img,
+    parking_capacity,
   } = ownedShopData;
 
   const fetchData = () => {
@@ -96,9 +95,7 @@ function EditShop({ setOpenModal }) {
     formData.append("tell", tell);
     formData.append("url", url);
     formData.append("upperBizName", upperBizName);
-    formData.append("middleBizName", middleBizName);
-    formData.append("lowerBizName", lowerBizName);
-    formData.append("parking", parking);
+    formData.append("parking_capacity", parking_capacity);
     formData.append("table", tables);
     formData.append("occupied_tables", occupied_tables);
     formData.append("opTime", opTime);
@@ -160,30 +157,13 @@ function EditShop({ setOpenModal }) {
           />
         </FlexRowDiv>
         <FlexRowDiv>
-          <EditLabel>분류-중</EditLabel>
-          <EditInput
-            value={middleBizName}
-            name="middleBizName"
-            onChange={onChangeOwnedShopData}
-          />
-        </FlexRowDiv>
-        <FlexRowDiv>
-          <EditLabel>분류-소</EditLabel>
-          <EditInput
-            value={lowerBizName}
-            name="lowerBizName"
-            onChange={onChangeOwnedShopData}
-          />
-        </FlexRowDiv>
-        <FlexRowDiv>
           <EditLabel>주차</EditLabel>
           <Input
-            value={parking}
-            name="parking"
+            value={parking_capacity}
+            name="parking_capacity"
             onChange={onChangeOwnedShopData}
             style={{ width: "150px" }}
           />
-          <EditLabel>{"대 가능"}</EditLabel>
         </FlexRowDiv>
         <FlexRowDiv>
           <EditLabel>테이블현황</EditLabel>

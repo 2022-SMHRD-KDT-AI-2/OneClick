@@ -51,7 +51,10 @@ function ReviewHeader({ data, score }) {
   return (
     <Header>
       {id && table && occupied_tables}
-      <Image src={`http://localhost:7501${title_img}`} />
+      <Image
+        src={`http://localhost:7501${title_img}`}
+        style={{ height: "220px", margin: "1rem" }}
+      />
       <ShopInfo>
         <ColumnDiv>
           <Shoptitle>👨🏻‍🍳SHOP 소개👨🏻‍🍳</Shoptitle>
@@ -67,7 +70,7 @@ function ReviewHeader({ data, score }) {
               <HoildayColor>휴무일</HoildayColor>
               <Label>주차공간</Label>
             </ColumnDiv>
-            <ColumnDiv>
+            <ColumnDiv style={{ width: "250px", overflow: "hidden" }}>
               {[
                 name,
                 upperBizName,
@@ -101,7 +104,7 @@ function ReviewHeader({ data, score }) {
 
             <StarContent>
               {score.map((item, index) => {
-                return <List4 key={index}>{item}</List4>;
+                return <List4 key={index}>{item ? item : ""}</List4>;
               })}
             </StarContent>
           </StarContentTitle>

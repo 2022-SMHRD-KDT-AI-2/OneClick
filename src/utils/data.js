@@ -24,9 +24,9 @@ export const reviewComment = [
 export const reviewTitle = ["맛", "가격", "청결도", "접근성", "분위기"];
 
 export const defaultPreset = [
-  { keyword: "All", category: "All" },
-  { keyword: "커피", category: "카페" },
-  { keyword: "한식", category: "중식" },
+  { keyword: "All", category: null },
+  { keyword: "카페", category: "카페" },
+  { keyword: "한식", category: "한식" },
   { keyword: "일식", category: "일식" },
   { keyword: "중식", category: "중식" },
 ];
@@ -41,6 +41,19 @@ export const categoryColors = {
   asian: "#EEEDDE",
   cafe: "#CEAB93",
   bar: "#19282F",
+  default: "#ffffff",
+};
+
+export const categoryColorsKorean = {
+  button: "#4D77FF",
+  clickedButton: "#0E185F",
+  한식: "#E83A14",
+  중식: "#FDFFA9",
+  일식: "#019267",
+  양식: "#533E85",
+  아시안: "#EEEDDE",
+  카페: "#CEAB93",
+  바: "#19282F",
   default: "#ffffff",
 };
 

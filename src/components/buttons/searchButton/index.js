@@ -3,11 +3,17 @@ import { Button } from "../styles";
 import axios from "axios";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { locationData, shopData } from "../../../atom/atom";
-import { URL } from "../../../utils/data";
+import { categoryColors, categoryColorsKorean, URL } from "../../../utils/data";
 import { Shop } from "../../map/Shop";
 import { destroyMap } from "../../../utils/functions";
+import styled from "@emotion/styled";
 
 const { Map, LatLng } = window.Tmapv2;
+
+const Search = styled(Button)`
+  color: black;
+  background-color: white;
+`;
 
 function SearchButton({ keyword, category }) {
   const mapRef = useRef(null);
@@ -30,7 +36,7 @@ function SearchButton({ keyword, category }) {
           // 지도의 높이
           height: "100%",
           // 지도의 범위
-          zoom: 16,
+          zoom: 18,
           zIndexMarker: 5,
           zIndexInfoWindow: 10,
         });
@@ -41,7 +47,14 @@ function SearchButton({ keyword, category }) {
         });
       });
   };
-  return <Button onClick={onClickSearchButton}>{keyword}</Button>;
+  return (
+    <Search
+      onClick={onClickSearchButton}
+      style={{ border: `3px solid ${categoryColorsKorean[category]}` }}
+    >
+      {keyword}
+    </Search>
+  );
 }
 
 export default SearchButton;
